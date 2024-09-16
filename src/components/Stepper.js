@@ -3,16 +3,19 @@ import { useSelector } from "react-redux";
 
 const stepperDetail = [
     {
-        name:'Personal Info'
+        name:'JOB DESCRIPTION'
     },
     {
-        name:'Account Info'
+        name:'SKILLS'
     },
     {
-        name:'Review'
+        name:'CONTRACT TYPE'
     },
     {
-        name:'Confirmation'
+        name:'RECRUITMENT INFO'
+    },
+    {
+        name:'GENERAL REVIEW'
     }
 ]
 
