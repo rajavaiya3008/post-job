@@ -8,14 +8,26 @@ import JobDescription from './JobDescription'
 const jobRoles = ['ReactJs','Api Testing']
 const defaultValue = 'Select Role'
 const name = 'jobRole'
+const selectJob = {
+    type:'select',
+    id:'jobRole',
+    name:'jobRole',
+    defaultVal:'Choose Job',
+    options:['ReactJs','Api Testing']
+}
 
 const JobForm = () => {
     const dispatch = useDispatch()
     const {activeForm} = useSelector(state => state.stepper)
+
+    const handleChange = (e) => {
+
+    }
+
   return (
     <div>
         <div>
-            <DropDown options={jobRoles} {...{defaultValue,name}}/>
+            <DropDown {...{...selectJob,handleChange}}/>
         </div>
         <div>
             {activeForm === 1 && <JobDescription />}

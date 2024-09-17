@@ -9,7 +9,7 @@ import { formSlice } from "./slices/form";
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['stepper','jobDescription'],
+    whitelist: ['stepper','formData'],
   };
 
   const appReducer = combineReducers({

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    activeForm:0
+    activeForm:1
 }
 
 export const stepperSlice = createSlice({
