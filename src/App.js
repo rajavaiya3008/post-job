@@ -1,11 +1,15 @@
-import JobForm from "./components/JobForm";
-import Stepper from "./components/Stepper";
+import JobForm from "./presentation/JobForm";
+import Navbar from "./presentation/Navbar";
+import Stepper from "./presentation/Stepper";
 
 function App() {
   return (
-    <div className="flex">
-      <Stepper />
-      <JobForm />
+    <div>
+      <Navbar />
+      <div className="flex">
+        <Stepper />
+        <JobForm />
+      </div>
     </div>
   );
 }

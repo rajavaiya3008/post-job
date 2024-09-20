@@ -9,8 +9,30 @@ const initialState = {
         engagement:'',
         engagementPSLAjencies:'',
         PSLAgency:'',
-        location:'',
+        city:'',
+        country:'',
         workType:''
+    },
+    jobSkills:{
+        seniorityLevel:'',
+        experience:'',
+        management:'',
+        skill:'',
+        skills:[]
+    },
+    contractType:{
+        employmentType:'',
+        requiredTime:'',
+        contractLength:'',
+        salaryType:'',
+        currency:'',
+        baseSalary:'',
+        salaryRange:'',
+        dailyRate:'',
+        rateRange:'',
+        recruiterFee:'',
+        rebateTime:'',
+        freeReplacement:''
     },
     error:{
 

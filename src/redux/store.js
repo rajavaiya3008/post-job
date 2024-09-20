@@ -4,17 +4,19 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { stepperSlice } from './slices/stepper';
 import { formSlice } from "./slices/form";
+import { postJobSlice } from "./slices/postjob";
 
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['stepper','formData'],
+    whitelist: ['stepper','formData','postjob'],
   };
 
   const appReducer = combineReducers({
     stepper: stepperSlice.reducer,
-    formData: formSlice.reducer
+    formData: formSlice.reducer,
+    postjob: postJobSlice.reducer
   });
 
   const rootReducer = (state, action) => {
