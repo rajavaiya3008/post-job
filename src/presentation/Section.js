@@ -42,16 +42,16 @@ const Section = ({
               return (
                 <InputField
                   key={i}
-                  {...{ ...field, value, error, handleChange }}
+                  {...{ ...field, value, error, handleChange, isActive }}
                 />
               );
-              case "number":
-                return (
-                  <InputField
-                    key={i}
-                    {...{ ...field, value, error, handleChange }}
-                  />
-                );
+            case "number":
+              return (
+                <InputField
+                  key={i}
+                  {...{ ...field, value, error, handleChange, isActive }}
+                />
+              );
             case "text-area":
               return (
                 <TextArea
@@ -99,6 +99,9 @@ const Section = ({
               return <ChildComponent key={i} {...{ formName }} />;
             }
             case "rebateTime": {
+              return <ChildComponent key={i} {...{ handleChange, formName }} />;
+            }
+            case "recruiterFee": {
               return <ChildComponent key={i} {...{ handleChange, formName }} />;
             }
           }

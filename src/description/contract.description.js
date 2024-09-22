@@ -1,3 +1,4 @@
+import RecruiterFee from "../presentation/RecruiterFee";
 import Replacement from "../presentation/Replacement";
 
 export const contValidation = {
@@ -12,7 +13,80 @@ export const contValidation = {
   rebateTime: [{ required: true, message: "Please Select Rebate Time" }],
   currency: [{ required: true, message: "Please Select Currency" }],
   baseSalary: [{ required: true, message: "Please Enter Salary" }],
+  dailyRate: [{ required: true, message: "Please Enter Salary" }],
+  recruiterFee: [{ required: true, message: "Please Select Recruiter Fee" }],
+  recruiterFeeType: [{ required: true, message: "Please Select Recruiter Fee Type" }],
+  recruiterFeeAmount: [{ required: true, message: "Please Enter Recruiter Fee Amount" }],
+  recruiterFeePercentage: [{ required: true, message: "Please Enter Recruiter Fee Percentage" }]
 };
+
+const recruiterFeeFields = {
+  formName: "contractType",
+  sectionTitle: "Recruiter fee",
+  inputFieldStyle: "mt-[30px]",
+  inputFields: [
+    {
+      type: "radio",
+      id: "Apply for all agencies recruiterFee",
+      name: "recruiterFee",
+      value: "Apply for all agencies",
+      label: "Apply for all agencies",
+    },
+    {
+      type: "radio",
+      id: "Use default for PSL recruiterFee",
+      name: "recruiterFee",
+      value: "Use default for PSL",
+      label: "Use default for PSL",
+      radioStyle: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ml-[40px]",
+    },
+    {
+      type: "radio",
+      id: "Fixed",
+      name: "recruiterFeeType",
+      value: "Fixed",
+      label: "Fixed",
+      radioStyle: "hidden",
+      radioLabel:
+        "flex w-[140px] p-[15px] px-[30px] mt-[20px] text-[16px] text-center rounded-[10px] bg-gray-300",
+    },
+    {
+      type: "number",
+      id: "recruiterFeeAmount",
+      name: "recruiterFeeAmount",
+      label: "FIXED FEE",
+      active: ['Fixed'],
+      activeName: "recruiterFeeType",
+    },
+    {
+      type: "radio",
+      id: "Percentage",
+      name: "recruiterFeeType",
+      value: "Percentage",
+      label: "Percentage",
+      active: ['Base Salary','Salary Range'],
+      activeName: "salaryType",
+      radioStyle: "hidden",
+      radioLabel:
+        "flex w-[140px] p-[15px] px-[30px] mt-[20px] text-[16px] text-center rounded-[10px] bg-gray-300",
+    },
+    {
+      type: "number",
+      id: "recruiterFeePercentage",
+      name: "recruiterFeePercentage",
+      label: "PERCENTAGE FEE",
+      active: ['Percentage'],
+      activeName: "recruiterFeeType",
+    },
+  ],
+  // childComponents: [
+  //   {
+  //     visible: "",
+  //     name: "recruiterFee",
+  //     ChildComponent: RecruiterFee,
+  //   },
+  // ],
+}
 
 const currencyField = {
   type: "select",
@@ -23,8 +97,19 @@ const currencyField = {
   options: ["USD", "EUR", "CHF", "GBP"],
 };
 
+const salaryRangeFields = {
+  formName: "contractType",
+  sectionTitle: "Salary Range",
+  inputFields: [
+    {
+      type:'range',
+      id:''
+    }
+  ],
+}
+
 export const dailyRateFields = {
-    formName: "contractType",
+  formName: "contractType",
   sectionTitle: "Daily Rate",
   inputFields: [
     currencyField,
@@ -271,7 +356,8 @@ export const contractSections = {
     ...contractData,
     contractLength,
     salaryTypeFields,
-    negotiableField,
+    dailyRateFields,
+    recruiterFeeFields,
     rebateTimeFields,
   ],
 };

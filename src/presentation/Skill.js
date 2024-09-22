@@ -7,7 +7,7 @@ const Skill = ({ formName }) => {
 
   return (
     <div className="mt-[10px]">
-      {skills.map((skill, i) => (
+      {skills?.map((skill, i) => (
         <Fragment key={i}>
           <span className="border text-[15px] p-[5px] rounded-[20px] bg-blue-100 ml-[5px]">
             {skill} <button onClick={() => removeSkill(skill)}>X</button>

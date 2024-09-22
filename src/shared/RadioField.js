@@ -1,7 +1,7 @@
 import React from "react";
 
-const defaultInputStyle = "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300";
-const defaultLabelStyle = "ms-2 text-sm font-medium text-gray-900 text-[20px]";
+const defaultInputStyle = "w-4 h-4 border-gray-300";
+const defaultLabelStyle = "ms-2 font-medium text-gray-900 text-[20px]";
 
 const RadioField = ({
   label,
@@ -23,7 +23,7 @@ const RadioField = ({
       <label
         htmlFor={props.id}
         className={`${radioLabel || defaultLabelStyle} ${
-          props.checked && radioLabel ? "text-white bg-gray-950" : ""
+          props.checked && radioLabel ? "text-white bg-gray-900" : "text-black bg-gray-100"
         } cursor-pointer`}
       >
         {label}

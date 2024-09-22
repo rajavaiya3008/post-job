@@ -59,7 +59,7 @@ const Replacement = ({handleChange ,formName}) => {
                 <Fragment key={i}>
                 <button onClick={() => removeReplacement(field.name)} className='translate-x-[-15px] translate-y-[55px]'>X</button>
               <InputField
-                {...{ ...field, value, error, handleChange }}
+                {...{ ...field, value, error, handleChange,isActive:true }}
                 />
                 </Fragment>
             );

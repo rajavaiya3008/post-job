@@ -1,7 +1,7 @@
 import React from "react";
 
-const InputField = ({label,error,handleChange,...props}) => {
-  return (
+const InputField = ({isActive,label,error,handleChange,...props}) => {
+  return isActive ?(
     <div>
       <label
         htmlFor="first_name"
@@ -16,7 +16,7 @@ const InputField = ({label,error,handleChange,...props}) => {
       />
       {error && <span className="text-[12px] text-red-500">{error}</span>}
     </div>
-  );
+  ) : null;
 };
 
 export default InputField;
