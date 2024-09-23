@@ -12,7 +12,15 @@ export const contValidation = {
   baseSalary: [{ required: true, message: "Please Enter Salary" }],
   dailyRate: [{ required: true, message: "Please Enter Salary" }],
   recruiterFee: [{ required: true, message: "Please Select Recruiter Fee" }],
-  recruiterFeeType: [{ required: true, message: "Please Select Recruiter Fee Type" }],
-  recruiterFeeAmount: [{ required: true, message: "Please Enter Recruiter Fee Amount" }],
-  recruiterFeePercentage: [{ required: true, message: "Please Enter Recruiter Fee Percentage" }]
+  recruiterFeeType: [
+    { required: true, message: "Please Select Recruiter Fee Type" },
+  ],
+  recruiterFeeAmount: [
+    { required: true, message: "Please Enter Recruiter Fee Amount" },
+  ],
+  recruiterFeePercentage: [
+    { required: true, message: "Please Enter Recruiter Fee Percentage" },
+  ],
+  salaryRange: [{ type: "range", message: "Invalid Range" }],
+  rateRange: [{ type: "range", message: "Invalid Range" }],
 };

@@ -1,15 +1,24 @@
 import React from "react";
 import Slider from "@mui/material/Slider";
+import { useDispatch, useSelector } from "react-redux";
+import { onChange } from "../redux/slices/form";
 
-const RangeSlider = () => {
+const RangeSlider = ({ handleChange, ...props }) => {
+  // const dispatch = useDispatch();
+  // const value = useSelector((state) => state.formData[formName][name]);
+
+  // const handleRangeChange = (e, value) => {
+  //   console.log("RRRRRR", e.target.value);
+  //   dispatch(onChange({ name, value, formName }));
+  // };
+
   return (
     <>
       <Slider
         getAriaLabel={() => "Temperature range"}
-        value={[10, 50]}
-        // onChange={handleChange}
+        {...props}
+        onChange={(e) => handleChange(e)}
         valueLabelDisplay="auto"
-        // getAriaValueText={valuetext}
       />
     </>
   );

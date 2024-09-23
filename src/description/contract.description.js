@@ -15,15 +15,23 @@ export const contValidation = {
   baseSalary: [{ required: true, message: "Please Enter Salary" }],
   dailyRate: [{ required: true, message: "Please Enter Salary" }],
   recruiterFee: [{ required: true, message: "Please Select Recruiter Fee" }],
-  recruiterFeeType: [{ required: true, message: "Please Select Recruiter Fee Type" }],
-  recruiterFeeAmount: [{ required: true, message: "Please Enter Recruiter Fee Amount" }],
-  recruiterFeePercentage: [{ required: true, message: "Please Enter Recruiter Fee Percentage" }]
+  recruiterFeeType: [
+    { required: true, message: "Please Select Recruiter Fee Type" },
+  ],
+  recruiterFeeAmount: [
+    { required: true, message: "Please Enter Recruiter Fee Amount" },
+  ],
+  recruiterFeePercentage: [
+    { required: true, message: "Please Enter Recruiter Fee Percentage" },
+  ],
+  salaryRange: [{ type: "range", message: "Invalid Range" }],
+  rateRange: [{ type: "range", message: "Invalid Range" }],
 };
 
-const recruiterFeeFields = {
+export const recruiterFeeFields = {
   formName: "contractType",
   sectionTitle: "Recruiter fee",
-  inputFieldStyle: "mt-[30px]",
+  inputFieldStyle: "mt-[30px] relative",
   inputFields: [
     {
       type: "radio",
@@ -55,8 +63,9 @@ const recruiterFeeFields = {
       id: "recruiterFeeAmount",
       name: "recruiterFeeAmount",
       label: "FIXED FEE",
-      active: ['Fixed'],
+      active: ["Fixed"],
       activeName: "recruiterFeeType",
+      inputDivStyle: "w-[73%] absolute top-[18%] left-[27%]",
     },
     {
       type: "radio",
@@ -64,7 +73,7 @@ const recruiterFeeFields = {
       name: "recruiterFeeType",
       value: "Percentage",
       label: "Percentage",
-      active: ['Base Salary','Salary Range'],
+      active: ["Base Salary", "Salary Range"],
       activeName: "salaryType",
       radioStyle: "hidden",
       radioLabel:
@@ -75,8 +84,9 @@ const recruiterFeeFields = {
       id: "recruiterFeePercentage",
       name: "recruiterFeePercentage",
       label: "PERCENTAGE FEE",
-      active: ['Percentage'],
+      active: ["Percentage"],
       activeName: "recruiterFeeType",
+      inputDivStyle: "w-[75%] absolute top-[59%] left-[25%]",
     },
   ],
   // childComponents: [
@@ -86,7 +96,7 @@ const recruiterFeeFields = {
   //     ChildComponent: RecruiterFee,
   //   },
   // ],
-}
+};
 
 const currencyField = {
   type: "select",
@@ -97,16 +107,63 @@ const currencyField = {
   options: ["USD", "EUR", "CHF", "GBP"],
 };
 
-const salaryRangeFields = {
+export const rateRangeFields = {
+  formName: "contractType",
+  sectionTitle: "Rate Range",
+  inputFields: [
+    {
+      type: "range",
+      id: "rateRange",
+      name: "rateRange",
+    },
+    currencyField,
+    {
+      type: "number",
+      id: "range",
+      name: "rateRange",
+      label: "FROM",
+      disabled: true,
+      from: true,
+    },
+    {
+      type: "number",
+      id: "range",
+      name: "rateRange",
+      label: "TO",
+      disabled: true,
+      from: false,
+    },
+  ],
+};
+
+export const salaryRangeFields = {
   formName: "contractType",
   sectionTitle: "Salary Range",
   inputFields: [
     {
-      type:'range',
-      id:''
-    }
+      type: "range",
+      id: "salaryRange",
+      name: "salaryRange",
+    },
+    currencyField,
+    {
+      type: "number",
+      id: "range",
+      name: "salaryRange",
+      label: "FROM",
+      disabled: true,
+      from: true,
+    },
+    {
+      type: "number",
+      id: "range",
+      name: "salaryRange",
+      label: "TO",
+      disabled: true,
+      from: false,
+    },
   ],
-}
+};
 
 export const dailyRateFields = {
   formName: "contractType",
@@ -356,8 +413,66 @@ export const contractSections = {
     ...contractData,
     contractLength,
     salaryTypeFields,
-    dailyRateFields,
-    recruiterFeeFields,
     rebateTimeFields,
+  ],
+};
+
+export const activeFieldsObj = {
+  Permanent: [
+    "employmentType",
+    "requiredTime",
+    "salaryType",
+    "currency",
+    // "baseSalary",
+    // "salaryRange",
+    "recruiterFee",
+    "recruiterFeeType",
+    "recruiterFeeAmount",
+    "recruiterFeePercentage",
+    "rebateTime",
+    "1stReplacement",
+  ],
+  Freelance: [
+    "employmentType",
+    "requiredTime",
+    "contractLength",
+    "salaryType",
+    "currency",
+    // "dailyRate",
+    // "rateRange",
+    "recruiterFee",
+    "recruiterFeeType",
+    "recruiterFeeAmount",
+    "recruiterFeePercentage",
+  ],
+  Temporary: [
+    "employmentType",
+    "requiredTime",
+    "contractLength",
+    "salaryType",
+    "currency",
+    // "baseSalary",
+    // "salaryRange",
+    "recruiterFee",
+    "recruiterFeeType",
+    "recruiterFeeAmount",
+    "recruiterFeePercentage",
+    "rebateTime",
+    "1stReplacement",
+  ],
+  Interim: [
+    "employmentType",
+    "requiredTime",
+    "contractLength",
+    "salaryType",
+    "currency",
+    // "baseSalary",
+    // "salaryRange",
+    "recruiterFee",
+    "recruiterFeeType",
+    "recruiterFeeAmount",
+    "recruiterFeePercentage",
+    "rebateTime",
+    "1stReplacement",
   ],
 };

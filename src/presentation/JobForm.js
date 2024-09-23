@@ -6,6 +6,7 @@ import JobSkills from "./JobSkills";
 import ContractType from "./ContractType";
 import { selectJob } from "../description/jobForm";
 import { JobFormContainer } from "../container/JobFormContainer";
+import RecruitmentInfo from "./RecruitmentInfo";
 
 const JobForm = () => {
   const { activeForm, handleChange, handleNavigation } = JobFormContainer();
@@ -24,6 +25,7 @@ const JobForm = () => {
         {activeForm === 1 && <JobDescription />}
         {activeForm === 2 && <JobSkills />}
         {activeForm === 3 && <ContractType />}
+        {activeForm === 4 && <RecruitmentInfo />}
         <div className="mt-[30px] flex justify-between">
           <Button
             text={"Previous"}
