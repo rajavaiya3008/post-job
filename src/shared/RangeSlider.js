@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "@mui/material/Slider";
-import { useDispatch, useSelector } from "react-redux";
-import { onChange } from "../redux/slices/form";
+// import { useDispatch, useSelector } from "react-redux";
+// import { onChange } from "../redux/slices/form";
 
 const RangeSlider = ({ handleChange, ...props }) => {
   // const dispatch = useDispatch();

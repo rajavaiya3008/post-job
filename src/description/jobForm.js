@@ -1,3 +1,8 @@
+import ContractType from "../presentation/ContractType";
+import GeneralReview from "../presentation/GeneralReview";
+import JobDescription from "../presentation/JobDescription";
+import JobSkills from "../presentation/JobSkills";
+import RecruitmentInfo from "../presentation/RecruitmentInfo";
 import { contValidation } from "./const";
 import { jobDescValidation } from "./jobDescription";
 import { jobSkillsValidation } from "./jobSkills";
@@ -9,6 +14,10 @@ export const selectJob = {
   name: "jobRole",
   defaultVal: "Choose Job",
   options: ["ReactJs", "Api Testing"],
+};
+
+export const selectJobValidation = {
+  jobRole: [{ required: true, message: "Please Select Job" }],
 };
 
 export const postJobData = {
@@ -23,4 +32,12 @@ export const postJobValidation = {
   2: jobSkillsValidation,
   3: contValidation,
   4: recruitmentInfoValidation,
+};
+
+export const jobFormSection = {
+  1: JobDescription,
+  2: JobSkills,
+  3: ContractType,
+  4: RecruitmentInfo,
+  5: GeneralReview,
 };

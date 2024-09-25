@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  postJob: {
+    jobRole: "",
+  },
   jobDescription: {
     jobTitle: "",
     jobDesc: "",
@@ -38,7 +41,6 @@ const initialState = {
     recruiterFeeAmount: "",
     recruiterFeePercentage: "",
     rebateTime: "",
-    freeReplacement: "",
   },
   recruitmentInfo: {
     cvLimit: "",

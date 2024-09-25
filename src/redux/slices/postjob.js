@@ -4,19 +4,23 @@ import { contValidation } from "../../description/const";
 const initialState = {
   contractValidation: {
     ...contValidation,
-    ["1stReplacement"]: [
+    ["1thReplacement"]: [
       { required: true, message: "Please Enter Replacement" },
     ],
   },
   replacementFields: [
     {
       type: "number",
-      id: `1stReplacement`,
-      name: `1stReplacement`,
-      label: `1ST MONTH`,
+      id: `1thReplacement`,
+      name: `1thReplacement`,
+      label: `1TH MONTH`,
       placeholder: "Free Replacement",
+      disabledByCheckbox: `1thReplacement`,
+      min: 0,
+      max: 100,
     },
   ],
+  finalFormFields: {},
 };
 
 export const postJobSlice = createSlice({
@@ -29,9 +33,21 @@ export const postJobSlice = createSlice({
     handleContractValidation: (state, action) => {
       state.contractValidation = action.payload;
     },
+    handleFinalFormFields: (state, action) => {
+      const { formName, keys } = action.payload;
+      state.finalFormFields[formName] = keys;
+    },
+    resetFinalFormFields: (state, action) => {
+      const { formName } = action.payload;
+      state.finalFormFields[formName] = [];
+    },
   },
 });
 
-export const { handleReplacementFields, handleContractValidation } =
-  postJobSlice.actions;
+export const {
+  handleReplacementFields,
+  handleContractValidation,
+  handleFinalFormFields,
+  resetFinalFormFields,
+} = postJobSlice.actions;
 export default postJobSlice.reducer;

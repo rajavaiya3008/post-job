@@ -13,9 +13,11 @@ import {
   handleContractValidation,
   handleReplacementFields,
 } from "../redux/slices/postjob";
+import { onChange } from "../redux/slices/form";
 
-export const ContractTypeContainer = () => {
-  console.log("Contract Rendered");
+export const ContractTypeContainer = (props) => {
+  const { formName } = props ?? {};
+  // console.log("Contract Rendered");
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.formData);
   const replacementFields = useSelector(
@@ -24,21 +26,24 @@ export const ContractTypeContainer = () => {
   const validationFields = useSelector(
     (state) => state.postjob.contractValidation
   );
-  console.log("contractValidation", validationFields);
+  // console.log("contractValidation", validationFields);
 
   const empType = formData?.contractType?.employmentType;
 
-  const contractValidation = Object.fromEntries(
-    Object.entries(validationFields).filter(
-      ([key]) =>
-        activeFieldsObj[empType]?.includes(key) || key.includes("Replacement")
-    )
-  );
-  console.log("contractValidation", contractValidation);
+  const contractValidation = empType
+    ? Object.fromEntries(
+        Object.entries(validationFields).filter(
+          ([key]) =>
+            activeFieldsObj[empType]?.includes(key) ||
+            (key.includes("Replacement") && empType !== "Freelance")
+        )
+      )
+    : { ...validationFields };
+  // console.log("contractValidation", contractValidation);
 
   if (formData.contractType.recruiterFeeType === "Fixed") {
     delete contractValidation.recruiterFeePercentage;
-  } else {
+  } else if (formData.contractType.recruiterFeeType === "Percentage") {
     delete contractValidation.recruiterFeeAmount;
   }
 
@@ -119,13 +124,16 @@ export const ContractTypeContainer = () => {
   // },[])
 
   const addFields = () => {
-    console.log("Add field Called");
+    // console.log("Add field Called");
     const field = {
       type: "number",
       id: `${replacementFields.length + 1}thReplacement`,
       name: `${replacementFields.length + 1}thReplacement`,
       label: `${replacementFields.length + 1}TH MONTH`,
       placeholder: "Free Replacement",
+      disabledByCheckbox: `${replacementFields.length + 1}thReplacement`,
+      min: 0,
+      max: 100,
     };
     dispatch(handleReplacementFields([...replacementFields, field]));
     dispatch(
@@ -139,11 +147,46 @@ export const ContractTypeContainer = () => {
     // console.log('validationFields',{...contractValidation,[field.name]: [{ required: true, message: "Please Enter Replacement" }]})s
   };
 
+  const removeReplacement = (name) => {
+    console.log("name", name);
+    const newReplacementFields = replacementFields
+      .filter((field) => field.name !== name)
+      .map((field, i) => ({
+        type: "number",
+        id: `${i + 1}thReplacement`,
+        name: `${i + 1}thReplacement`,
+        label: `${i + 1}TH MONTH`,
+        placeholder: "Free Replacement",
+        disabledByCheckbox: `${i + 1}thReplacement`,
+        min: 0,
+        max: 100,
+      }));
+    // console.log("newReplacementFields", newReplacementFields);
+    // console.log("contractValidation", contractValidation);
+    const newValidation = Object.fromEntries(
+      Object.entries(contractValidation).filter(
+        ([key], i) => !key.includes("Replacement")
+      )
+    );
+    // console.log("newValidation", newValidation);
+    newReplacementFields.forEach((field) => {
+      newValidation[field.name] = [
+        { required: true, message: "Please Enter Replacement" },
+      ];
+    });
+    // console.log("newValidation", newValidation);
+    // console.log("contractData", contractData);
+    dispatch(onChange({ name, value: "", formName }));
+    dispatch(handleReplacementFields(newReplacementFields));
+    dispatch(handleContractValidation(newValidation));
+  };
+
   return {
     contractFields,
     replacementFields,
     contractValidation,
     formData,
     addFields,
+    removeReplacement,
   };
 };

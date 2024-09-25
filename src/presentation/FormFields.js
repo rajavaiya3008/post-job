@@ -3,12 +3,12 @@ import InputField from "../shared/InputField";
 import TextArea from "../shared/TextArea";
 import DropDown from "../shared/DropDown";
 import RadioField from "../shared/RadioField";
-import { SectionContainer } from "../container/SectionContainer";
+import { FormFieldsContainer } from "../container/FormFieldsContainer";
 import { sectionErrorConditions } from "../description/section";
 import RangeSlider from "../shared/RangeSlider";
 import CheckBoxField from "../shared/CheckBoxField";
 
-const Section = ({
+const FormFields = ({
   sectionTitle,
   inputFields,
   formName,
@@ -17,7 +17,7 @@ const Section = ({
   style,
   inputFieldStyle,
 }) => {
-  const { formData, formError, handleChange } = SectionContainer({
+  const { formData, formError, handleChange } = FormFieldsContainer({
     formName,
     formValidation,
   });
@@ -45,7 +45,11 @@ const Section = ({
             : field.active.includes(formData?.[formName]?.[field.activeName]);
           let rangeVal = field?.from ? value[0] : value[1] ?? 0;
           value = field.hasOwnProperty("from") ? rangeVal : value;
-          const disabled = field?.disabledByCheckbox ? value === true : false;
+          const disabled = field?.disabled
+            ? field?.disabled
+            : field?.disabledByCheckbox
+            ? value === true
+            : false;
           switch (field.type) {
             case "text":
               return (
@@ -159,4 +163,4 @@ const Section = ({
   );
 };
 
-export default Section;
+export default FormFields;

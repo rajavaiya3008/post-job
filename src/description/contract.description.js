@@ -1,4 +1,3 @@
-import RecruiterFee from "../presentation/RecruiterFee";
 import Replacement from "../presentation/Replacement";
 
 export const contValidation = {
@@ -65,7 +64,7 @@ export const recruiterFeeFields = {
       label: "FIXED FEE",
       active: ["Fixed"],
       activeName: "recruiterFeeType",
-      inputDivStyle: "w-[73%] absolute top-[18%] left-[27%]",
+      inputDivStyle: "w-[73%] absolute top-[30px] left-[27%]",
     },
     {
       type: "radio",
@@ -86,7 +85,9 @@ export const recruiterFeeFields = {
       label: "PERCENTAGE FEE",
       active: ["Percentage"],
       activeName: "recruiterFeeType",
-      inputDivStyle: "w-[75%] absolute top-[59%] left-[25%]",
+      inputDivStyle: "w-[75%] absolute top-[105px] left-[25%]",
+      min: 0,
+      max: 100,
     },
   ],
   // childComponents: [
@@ -115,6 +116,8 @@ export const rateRangeFields = {
       type: "range",
       id: "rateRange",
       name: "rateRange",
+      min: 0,
+      max: 1000000,
     },
     currencyField,
     {
@@ -144,6 +147,8 @@ export const salaryRangeFields = {
       type: "range",
       id: "salaryRange",
       name: "salaryRange",
+      min: 0,
+      max: 1000000,
     },
     currencyField,
     {

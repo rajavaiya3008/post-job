@@ -94,7 +94,7 @@ export const recruitmentInfoData = [
         name: "termsAndServices",
         value: "termsAndServices",
         label:
-          "Accept and agree with the DDatori Terms of Serviceand Privacy Policy",
+          "Accept and agree with the DDatori Terms of Service and Privacy Policy",
       },
     ],
   },
