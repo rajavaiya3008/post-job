@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   postJobData,
+  postJobTitle,
   // postJobValidation,
   selectJobValidation,
 } from "../description/jobForm";
@@ -11,14 +12,23 @@ import { ContractTypeContainer } from "./ContractTypeContainer";
 // import { validateAllData } from "../utils/validation";
 import { toast } from "react-toastify";
 import { validation } from "../utils/validation";
-import { handleFormError } from "../redux/slices/form";
+import { handleFormError, resetFormData } from "../redux/slices/form";
+import { postNewJob, resetPostJobData } from "../redux/slices/postjob";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { ALL_JOB } from "../utils/routeConstant";
+import { handleNavigate } from "../redux/slices/stepper";
 
 const GeneralReviewContainer = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [prams] = useSearchParams();
   const formData = useSelector((state) => state.formData);
   const formFields = useSelector((state) => state.postjob.finalFormFields);
   const { jobRole } = formData.postJob;
-  const { contractValidation } = ContractTypeContainer();
+  const jobId = prams.get("id");
+  // console.log("jobId in General review", jobId);
+  const { contractValidation, replacementFields } = ContractTypeContainer();
+  // console.log("formData", formData);
   // useEffect(() => {
   //   return () => {
   //     console.log("RRRRR");
@@ -72,9 +82,9 @@ const GeneralReviewContainer = () => {
 
   const allData = Object.entries(postJobData).map(([key, val]) => ({
     ...filterPostJobData(formData[val], formFields[val], val),
-    title: val,
+    title: postJobTitle[key],
   }));
-  console.log("allData", allData);
+  // console.log("allData", allData);
 
   // const mokData = allDataValidation(2);
   // console.log("mokData", mokData);
@@ -89,7 +99,7 @@ const GeneralReviewContainer = () => {
         })[0]
       ).length
   );
-  console.log("isAllDataValid", isAllDataValid);
+  // console.log("isAllDataValid", isAllDataValid);
 
   const submitJobData = () => {
     if (!isAllDataValid) {
@@ -98,7 +108,24 @@ const GeneralReviewContainer = () => {
       const error = validation("jobRole", jobRole, selectJobValidation);
       dispatch(handleFormError({ error, formName: "postJob" }));
       if (!Object.keys(error).length) {
-        toast.success("Job is Successfully Created");
+        dispatch(
+          postNewJob({
+            id: jobId || Date.now(),
+            jobData: {
+              ...formData,
+              contractValidation,
+              replacementFields,
+              finalFormFields: formFields,
+            },
+          })
+        );
+        dispatch(resetFormData());
+        dispatch(resetPostJobData());
+        dispatch(handleNavigate(1));
+        jobId
+          ? toast.success("Job is Successfully Edited")
+          : toast.success("Job is Successfully Created");
+        navigate(ALL_JOB, { replace: true });
       }
     }
   };

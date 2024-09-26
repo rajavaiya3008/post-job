@@ -111,3 +111,42 @@ export const allDataValidation = ({
   }
   // let error = validateAllData(validationData, validationFields);
 };
+
+export const handlePagination = ({ allJobData, deleteJob }) => {
+  const tableColumn = [
+    {
+      type: "text",
+      name: "id",
+      label: "ID",
+    },
+    {
+      type: "text",
+      name: "jobName",
+      label: "Job Name",
+    },
+    {
+      type: "link",
+      label: "Action",
+      linkArr: [
+        {
+          name: "Edit",
+        },
+      ],
+    },
+    {
+      type: "button",
+      label: "Delete",
+      btnArr: [
+        {
+          name: "Delete",
+          onClick: deleteJob,
+        },
+      ],
+    },
+  ];
+  let tableRows = Object.entries(allJobData).map(([key, val]) => ({
+    id: key,
+    jobName: val.postJob.jobRole,
+  }));
+  return [tableColumn, tableRows];
+};

@@ -21,6 +21,7 @@ const initialState = {
     },
   ],
   finalFormFields: {},
+  allJobData: {},
 };
 
 export const postJobSlice = createSlice({
@@ -41,6 +42,25 @@ export const postJobSlice = createSlice({
       const { formName } = action.payload;
       state.finalFormFields[formName] = [];
     },
+    postNewJob: (state, action) => {
+      const { id, jobData } = action.payload;
+      state.allJobData[id] = jobData;
+    },
+    resetPostJobData: (state) => {
+      state.contractValidation = initialState.contractValidation;
+      state.replacementFields = initialState.replacementFields;
+      state.finalFormFields = initialState.finalFormFields;
+    },
+    setPostJobData: (state, action) => {
+      const { contractValidation, replacementFields, finalFormFields } =
+        action.payload;
+      state.contractValidation = contractValidation;
+      state.replacementFields = replacementFields;
+      state.finalFormFields = finalFormFields;
+    },
+    deleteJobData: (state, action) => {
+      state.allJobData = action.payload;
+    },
   },
 });
 
@@ -49,5 +69,9 @@ export const {
   handleContractValidation,
   handleFinalFormFields,
   resetFinalFormFields,
+  postNewJob,
+  resetPostJobData,
+  setPostJobData,
+  deleteJobData,
 } = postJobSlice.actions;
 export default postJobSlice.reducer;

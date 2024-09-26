@@ -3,6 +3,7 @@ import SingleField from "./SingleField";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { useDispatch } from "react-redux";
 import { handleNavigate } from "../redux/slices/stepper";
+import { postJobFieldsTitle } from "../description/jobForm";
 
 const DisplayData = ({ title, activeForm, ...props }) => {
   const dispatch = useDispatch();
@@ -16,7 +17,11 @@ const DisplayData = ({ title, activeForm, ...props }) => {
         <ModeEditOutlineIcon />
       </button>
       {Object.entries(props).map(([key, value], i) => (
-        <SingleField key={i} label={key} value={value} />
+        <SingleField
+          key={i}
+          label={postJobFieldsTitle[key] ?? key}
+          value={value}
+        />
       ))}
     </div>
   );

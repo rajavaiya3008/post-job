@@ -67,8 +67,20 @@ export const formSlice = createSlice({
       state.jobDescription.engagementPSLAjencies = "";
       state.jobDescription.PSLAgency = "";
     },
+    resetFormData: () => {
+      return initialState;
+    },
+    setFormData: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { onChange, handleFormError, clearPslAgency } = formSlice.actions;
+export const {
+  onChange,
+  handleFormError,
+  clearPslAgency,
+  resetFormData,
+  setFormData,
+} = formSlice.actions;
 export default formSlice.reducer;

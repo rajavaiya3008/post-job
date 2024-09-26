@@ -1,14 +1,14 @@
-import JobForm from "./presentation/JobForm";
+// import JobForm from "./presentation/JobForm";
+// import Stepper from "./presentation/Stepper";
 import Navbar from "./presentation/Navbar";
-import Stepper from "./presentation/Stepper";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <div>
       <Navbar />
-      <div className="flex">
-        <Stepper />
-        <JobForm />
+      <div>
+        <Outlet />
       </div>
     </div>
   );
