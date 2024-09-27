@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { handleNavigate } from "../redux/slices/stepper";
 // import { validateAllData } from "../utils/validation";
-import { handleFormError } from "../redux/slices/form";
+import { handleFormError, onChange } from "../redux/slices/form";
 import {
   postJobData,
   // postJobValidation,
-  selectJobValidation,
+  // selectJobValidation,
 } from "../description/jobForm";
 import { ContractTypeContainer } from "./ContractTypeContainer";
 import { handleFinalFormFields } from "../redux/slices/postjob";
-import { FormFieldsContainer } from "./FormFieldsContainer";
+// import { FormContainer } from "./FormContainer";
 import { allDataValidation } from "../utils/constantFun";
 
 export const JobFormContainer = () => {
@@ -17,15 +17,33 @@ export const JobFormContainer = () => {
   const dispatch = useDispatch();
   const { activeForm } = useSelector((state) => state.stepper);
   const formData = useSelector((state) => state.formData);
+  const allJobData = useSelector((state) => state.postjob.allJobData);
   const jobRole = formData.postJob.jobRole;
   const jobRoleErr = formData.error.postJob?.jobRole;
   const { contractValidation } = ContractTypeContainer();
-  const { handleChange } = FormFieldsContainer({
-    formName: "postJob",
-    formValidation: selectJobValidation,
-  });
+  // const { handleChange } = FormContainer({
+  //   formName: "postJob",
+  //   formValidation: [],
+  // });
 
-  // const handleChange = (e) => {};
+  const jobOptions = Object.values(allJobData).map(
+    (job) => job.jobDescription.jobTitle
+  );
+
+  const setJobData = () => {};
+
+  const handleChange = (e) => {
+    console.log("on chnage in postjob RRR");
+    const { name, value, id } = e.target;
+    console.log("id", id);
+    switch (name) {
+      case "jobRole": {
+        dispatch(onChange({ name, value, formName: "postJob" }));
+
+        break;
+      }
+    }
+  };
 
   const handleNavigation = (navigate) => {
     if (navigate === "prev") {
@@ -99,6 +117,7 @@ export const JobFormContainer = () => {
     activeForm,
     jobRole,
     jobRoleErr,
+    jobOptions,
     handleChange,
     handleNavigation,
   };

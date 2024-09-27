@@ -1,12 +1,13 @@
 import React from "react";
-import InputField from "../shared/InputField";
-import TextArea from "../shared/TextArea";
-import DropDown from "../shared/DropDown";
-import RadioField from "../shared/RadioField";
-import { FormFieldsContainer } from "../container/FormFieldsContainer";
+// import InputField from "../shared/InputField";
+// import TextArea from "../shared/TextArea";
+// import DropDown from "../shared/DropDown";
+// import RadioField from "../shared/RadioField";
+import { FormContainer } from "../container/FormContainer";
 import { sectionErrorConditions } from "../description/section";
-import RangeSlider from "../shared/RangeSlider";
-import CheckBoxField from "../shared/CheckBoxField";
+// import RangeSlider from "../shared/RangeSlider";
+// import CheckBoxField from "../shared/CheckBoxField";
+import Form from "../shared/Form";
 
 const FormFields = ({
   sectionTitle,
@@ -17,7 +18,7 @@ const FormFields = ({
   style,
   inputFieldStyle,
 }) => {
-  const { formData, formError, handleChange } = FormFieldsContainer({
+  const { formData, formError, handleChange } = FormContainer({
     formName,
     formValidation,
   });
@@ -30,7 +31,8 @@ const FormFields = ({
     >
       <h3 className="text-[17px]">{sectionTitle}</h3>
       <div className={inputFieldStyle ? inputFieldStyle : ""}>
-        {inputFields.map((field, i) => {
+        <Form {...{ formName, formValidation, inputFields }} />
+        {/* {inputFields.map((field, i) => {
           let value =
             field?.value && field.type === "radio"
               ? field?.value
@@ -105,7 +107,7 @@ const FormFields = ({
                 />
               );
           }
-        })}
+        })} */}
       </div>
 
       {sectionErrorConditions.map(
@@ -132,9 +134,9 @@ const FormFields = ({
             case "rebateTime": {
               return <ChildComponent key={i} {...{ handleChange, formName }} />;
             }
-            case "recruiterFee": {
-              return <ChildComponent key={i} {...{ handleChange, formName }} />;
-            }
+            // case "recruiterFee": {
+            //   return <ChildComponent key={i} {...{ handleChange, formName }} />;
+            // }
           }
         }
         // visible === formData?.[formName]?.[name] ? (

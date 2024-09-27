@@ -1,29 +1,31 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../shared/Pagination";
-import { deleteJobData, resetPostJobData } from "../redux/slices/postjob";
-import { handlePagination } from "../utils/constantFun";
-import { resetFormData } from "../redux/slices/form";
-import { handleNavigate } from "../redux/slices/stepper";
+// import { deleteJobData, resetPostJobData } from "../redux/slices/postjob";
+// import { handlePagination } from "../utils/constantFun";
+// import { resetFormData } from "../redux/slices/form";
+// import { handleNavigate } from "../redux/slices/stepper";
+import AllJobContainer from "../container/AllJobContainer";
 // import Pagination from "@mui/material/Pagination";
 
 const AllJob = () => {
-  const dispatch = useDispatch();
-  const allJobData = useSelector((state) => state.postjob.allJobData);
+  const { tableColumn, tableRows } = AllJobContainer();
+  //   const dispatch = useDispatch();
+  //   const allJobData = useSelector((state) => state.postjob.allJobData);
 
-  useEffect(() => {
-    dispatch(resetFormData());
-    dispatch(resetPostJobData());
-    dispatch(handleNavigate(1));
-  }, []);
+  //   useEffect(() => {
+  //     dispatch(resetFormData());
+  //     dispatch(resetPostJobData());
+  //     dispatch(handleNavigate(1));
+  //   }, []);
 
-  const deleteJob = (id) => {
-    const jobData = { ...allJobData };
-    delete jobData[id];
-    dispatch(deleteJobData(jobData));
-  };
+  //   const deleteJob = (id) => {
+  //     const jobData = { ...allJobData };
+  //     delete jobData[id];
+  //     dispatch(deleteJobData(jobData));
+  //   };
 
-  const [tableColumn, tableRows] = handlePagination({ allJobData, deleteJob });
+  //   const [tableColumn, tableRows] = handlePagination({ allJobData, deleteJob });
 
   //   const handlePagination = (allJobData) => {
   //     const tableColumn = [

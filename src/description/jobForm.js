@@ -13,7 +13,7 @@ export const selectJob = {
   id: "jobRole",
   name: "jobRole",
   defaultVal: "Choose Job",
-  options: ["ReactJs", "Api Testing"],
+  // options: ["ReactJs", "Api Testing"],
 };
 
 export const selectJobValidation = {

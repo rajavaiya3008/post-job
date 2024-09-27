@@ -149,6 +149,15 @@ export const ContractTypeContainer = (props) => {
 
   const removeReplacement = (name) => {
     console.log("name", name);
+    console.log(Number(name[0]));
+    const deleteFieldNum = Number(name[0]);
+    // dispatch(
+    //   onChange({
+    //     name,
+    //     value: "",
+    //     formName,
+    //   })
+    // );
     const newReplacementFields = replacementFields
       .filter((field) => field.name !== name)
       .map((field, i) => ({
@@ -161,6 +170,18 @@ export const ContractTypeContainer = (props) => {
         min: 0,
         max: 100,
       }));
+    newReplacementFields.forEach((field, i) => {
+      dispatch(
+        onChange({
+          name: field.name,
+          value:
+            i + 1 >= deleteFieldNum
+              ? formData[formName][`${i + 2}thReplacement`]
+              : formData[formName][`${i + 1}thReplacement`],
+          formName,
+        })
+      );
+    });
     // console.log("newReplacementFields", newReplacementFields);
     // console.log("contractValidation", contractValidation);
     const newValidation = Object.fromEntries(
@@ -176,7 +197,13 @@ export const ContractTypeContainer = (props) => {
     });
     // console.log("newValidation", newValidation);
     // console.log("contractData", contractData);
-    dispatch(onChange({ name, value: "", formName }));
+    dispatch(
+      onChange({
+        name: `${newReplacementFields.length + 1}thReplacement`,
+        value: "",
+        formName,
+      })
+    );
     dispatch(handleReplacementFields(newReplacementFields));
     dispatch(handleContractValidation(newValidation));
   };

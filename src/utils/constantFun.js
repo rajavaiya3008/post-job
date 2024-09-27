@@ -126,7 +126,7 @@ export const handlePagination = ({ allJobData, deleteJob }) => {
     },
     {
       type: "link",
-      label: "Action",
+      label: "Edit",
       linkArr: [
         {
           name: "Edit",
@@ -146,7 +146,7 @@ export const handlePagination = ({ allJobData, deleteJob }) => {
   ];
   let tableRows = Object.entries(allJobData).map(([key, val]) => ({
     id: key,
-    jobName: val.postJob.jobRole,
+    jobName: val.jobDescription.jobTitle,
   }));
   return [tableColumn, tableRows];
 };

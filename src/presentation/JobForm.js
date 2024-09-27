@@ -10,15 +10,27 @@ import { JobFormContainer } from "../container/JobFormContainer";
 // import GeneralReview from "./GeneralReview";
 
 const JobForm = () => {
-  const { activeForm, jobRole, jobRoleErr, handleChange, handleNavigation } =
-    JobFormContainer();
+  const {
+    activeForm,
+    jobRole,
+    jobRoleErr,
+    jobOptions,
+    handleChange,
+    handleNavigation,
+  } = JobFormContainer();
   const ActiveFormComponent = jobFormSection[activeForm];
 
   return (
     <div className="w-[700px] mt-[30px]">
       <div>
         <DropDown
-          {...{ ...selectJob, value: jobRole, error: jobRoleErr, handleChange }}
+          {...{
+            ...selectJob,
+            value: jobRole,
+            options: jobOptions,
+            error: jobRoleErr,
+            handleChange,
+          }}
           style={
             "bg-blue-100 border border-gray-300 text-gray-400 text-lg rounded-lg w-[686px] p-2.5"
           }

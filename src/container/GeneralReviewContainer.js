@@ -3,7 +3,7 @@ import {
   postJobData,
   postJobTitle,
   // postJobValidation,
-  selectJobValidation,
+  // selectJobValidation,
 } from "../description/jobForm";
 import { allDataValidation, filterPostJobData } from "../utils/constantFun";
 // import { resetFinalFormFields } from "../redux/slices/postjob";
@@ -11,12 +11,12 @@ import { allDataValidation, filterPostJobData } from "../utils/constantFun";
 import { ContractTypeContainer } from "./ContractTypeContainer";
 // import { validateAllData } from "../utils/validation";
 import { toast } from "react-toastify";
-import { validation } from "../utils/validation";
-import { handleFormError, resetFormData } from "../redux/slices/form";
-import { postNewJob, resetPostJobData } from "../redux/slices/postjob";
+// import { validation } from "../utils/validation";
+// import { handleFormError } from "../redux/slices/form";
+import { postNewJob } from "../redux/slices/postjob";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { ALL_JOB } from "../utils/routeConstant";
-import { handleNavigate } from "../redux/slices/stepper";
+// import { handleNavigate } from "../redux/slices/stepper";
 
 const GeneralReviewContainer = () => {
   const dispatch = useDispatch();
@@ -105,28 +105,43 @@ const GeneralReviewContainer = () => {
     if (!isAllDataValid) {
       toast.error("Please Fill All Detail Correctly");
     } else {
-      const error = validation("jobRole", jobRole, selectJobValidation);
-      dispatch(handleFormError({ error, formName: "postJob" }));
-      if (!Object.keys(error).length) {
-        dispatch(
-          postNewJob({
-            id: jobId || Date.now(),
-            jobData: {
-              ...formData,
-              contractValidation,
-              replacementFields,
-              finalFormFields: formFields,
-            },
-          })
-        );
-        dispatch(resetFormData());
-        dispatch(resetPostJobData());
-        dispatch(handleNavigate(1));
-        jobId
-          ? toast.success("Job is Successfully Edited")
-          : toast.success("Job is Successfully Created");
-        navigate(ALL_JOB, { replace: true });
-      }
+      // const error = validation("jobRole", jobRole, selectJobValidation);
+      // dispatch(handleFormError({ error, formName: "postJob" }));
+      dispatch(
+        postNewJob({
+          id: jobId || Date.now(),
+          jobData: {
+            ...formData,
+            contractValidation,
+            replacementFields,
+            finalFormFields: formFields,
+          },
+        })
+      );
+      jobId
+        ? toast.success("Job is Successfully Edited")
+        : toast.success("Job is Successfully Created");
+      navigate(ALL_JOB, { replace: true });
+      // if (!Object.keys(error).length) {
+      //   dispatch(
+      //     postNewJob({
+      //       id: jobId || Date.now(),
+      //       jobData: {
+      //         ...formData,
+      //         contractValidation,
+      //         replacementFields,
+      //         finalFormFields: formFields,
+      //       },
+      //     })
+      //   );
+      //   // dispatch(resetFormData());
+      //   // dispatch(resetPostJobData());
+      //   // dispatch(handleNavigate(1));
+      //   jobId
+      //     ? toast.success("Job is Successfully Edited")
+      //     : toast.success("Job is Successfully Created");
+      //   navigate(ALL_JOB, { replace: true });
+      // }
     }
   };
 

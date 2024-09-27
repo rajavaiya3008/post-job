@@ -3,7 +3,7 @@ import { handleFormError, onChange } from "../redux/slices/form";
 import { validation } from "../utils/validation";
 import { resetFinalFormFields } from "../redux/slices/postjob";
 
-export const FormFieldsContainer = ({ formName, formValidation }) => {
+export const FormContainer = ({ formName, formValidation }) => {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.formData);
   const formError = { ...formData.error[formName] };
