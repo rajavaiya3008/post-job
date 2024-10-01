@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteJobData, resetPostJobData } from "../redux/slices/postjob";
 import { handlePagination } from "../utils/constantFun";
@@ -8,6 +8,8 @@ import { handleNavigate } from "../redux/slices/stepper";
 const AllJobContainer = () => {
   const dispatch = useDispatch();
   const allJobData = useSelector((state) => state.postjob.allJobData);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [jobIdToDelete, setJobIdToDelete] = useState(null);
 
   useEffect(() => {
     dispatch(resetFormData());
@@ -15,10 +17,18 @@ const AllJobContainer = () => {
     dispatch(handleNavigate(1));
   }, []);
 
+  const handleConfirmDelete = (isConfirmed) => {
+    if (isConfirmed && jobIdToDelete) {
+      const jobData = { ...allJobData };
+      delete jobData[jobIdToDelete];
+      dispatch(deleteJobData(jobData));
+    }
+    setJobIdToDelete(null);
+  };
+
   const deleteJob = (id) => {
-    const jobData = { ...allJobData };
-    delete jobData[id];
-    dispatch(deleteJobData(jobData));
+    setJobIdToDelete(id);
+    setIsDialogOpen(true);
   };
 
   const [tableColumn, tableRows] = handlePagination({ allJobData, deleteJob });
@@ -26,6 +36,9 @@ const AllJobContainer = () => {
   return {
     tableColumn,
     tableRows,
+    isDialogOpen,
+    setIsDialogOpen,
+    handleConfirmDelete,
   };
 };
 

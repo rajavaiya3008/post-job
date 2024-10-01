@@ -14,7 +14,7 @@ const PostJobContainer = () => {
   useEffect(() => {
     if (jobId) {
       const currJobData = Object?.entries(allJobData)?.find(
-        ([key, val]) => key === jobId
+        ([key]) => key === jobId
       );
       //   console.log("currJobData", currJobData);
       if (!currJobData) {

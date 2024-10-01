@@ -8,12 +8,16 @@ import {
   recruiterFeeFields,
   salaryRangeFields,
   activeFieldsObj,
+  // replacementName,
 } from "../description/contract.description";
 import {
   handleContractValidation,
   handleReplacementFields,
 } from "../redux/slices/postjob";
 import { onChange } from "../redux/slices/form";
+import { objectEntries, objectFromEntries } from "../utils/commonFunction";
+import { NUM_INPUT, RANGE_INPUT, SALARYTYPE } from "../utils/constantVariable";
+import { getOrdinalSuffix } from "../utils/constantFun";
 
 export const ContractTypeContainer = (props) => {
   const { formName } = props ?? {};
@@ -31,8 +35,8 @@ export const ContractTypeContainer = (props) => {
   const empType = formData?.contractType?.employmentType;
 
   const contractValidation = empType
-    ? Object.fromEntries(
-        Object.entries(validationFields).filter(
+    ? objectFromEntries(
+        objectEntries(validationFields).filter(
           ([key]) =>
             activeFieldsObj[empType]?.includes(key) ||
             (key.includes("Replacement") && empType !== "Freelance")
@@ -52,7 +56,7 @@ export const ContractTypeContainer = (props) => {
     : contractSections?.Default;
 
   const salaryFieldIndex = contractFields.findIndex(
-    (sec) => sec.name === "salaryType"
+    (sec) => sec.name === SALARYTYPE
   );
 
   switch (formData?.contractType?.salaryType) {
@@ -76,7 +80,7 @@ export const ContractTypeContainer = (props) => {
         recruiterFeeFields
       );
       contractValidation.salaryRange = [
-        { type: "range", message: "Invalid Range" },
+        { type: RANGE_INPUT, message: "Invalid Range" },
       ];
       break;
     }
@@ -109,7 +113,7 @@ export const ContractTypeContainer = (props) => {
         recruiterFeeFields
       );
       contractValidation.rateRange = [
-        { type: "range", message: "Invalid Range" },
+        { type: RANGE_INPUT, message: "Invalid Range" },
       ];
       break;
     }
@@ -126,10 +130,12 @@ export const ContractTypeContainer = (props) => {
   const addFields = () => {
     // console.log("Add field Called");
     const field = {
-      type: "number",
+      type: NUM_INPUT,
       id: `${replacementFields.length + 1}thReplacement`,
       name: `${replacementFields.length + 1}thReplacement`,
-      label: `${replacementFields.length + 1}TH MONTH`,
+      label: `${replacementFields.length + 1}${getOrdinalSuffix(
+        replacementFields.length + 1
+      )} MONTH`,
       placeholder: "Free Replacement",
       disabledByCheckbox: `${replacementFields.length + 1}thReplacement`,
       min: 0,
@@ -148,23 +154,17 @@ export const ContractTypeContainer = (props) => {
   };
 
   const removeReplacement = (name) => {
-    console.log("name", name);
-    console.log(Number(name[0]));
+    // console.log("name", name);
+    // console.log(Number(name[0]));
     const deleteFieldNum = Number(name[0]);
-    // dispatch(
-    //   onChange({
-    //     name,
-    //     value: "",
-    //     formName,
-    //   })
-    // );
+
     const newReplacementFields = replacementFields
       .filter((field) => field.name !== name)
       .map((field, i) => ({
-        type: "number",
+        type: NUM_INPUT,
         id: `${i + 1}thReplacement`,
         name: `${i + 1}thReplacement`,
-        label: `${i + 1}TH MONTH`,
+        label: `${i + 1}${getOrdinalSuffix(i + 1)} MONTH`,
         placeholder: "Free Replacement",
         disabledByCheckbox: `${i + 1}thReplacement`,
         min: 0,
@@ -184,8 +184,8 @@ export const ContractTypeContainer = (props) => {
     });
     // console.log("newReplacementFields", newReplacementFields);
     // console.log("contractValidation", contractValidation);
-    const newValidation = Object.fromEntries(
-      Object.entries(contractValidation).filter(
+    const newValidation = objectFromEntries(
+      objectEntries(contractValidation).filter(
         ([key], i) => !key.includes("Replacement")
       )
     );

@@ -5,7 +5,16 @@ import DropDown from "./DropDown";
 import RadioField from "./RadioField";
 import RangeSlider from "./RangeSlider";
 import CheckBoxField from "./CheckBoxField";
-import { FormContainer } from "../container/FormContainer";
+import { FormContainer } from "../container/formContainer";
+import {
+  CHECKBOX_INPUT,
+  NUM_INPUT,
+  RADIO_INPUT,
+  RANGE_INPUT,
+  SELECT_INPUT,
+  TEXT_AREA_INPUT,
+  TEXT_INPUT,
+} from "../utils/constantVariable";
 
 const Form = ({ formName, formValidation, inputFields }) => {
   const { formData, handleChange } = FormContainer({
@@ -16,11 +25,11 @@ const Form = ({ formName, formValidation, inputFields }) => {
     <>
       {inputFields.map((field, i) => {
         let value =
-          field?.value && field.type === "radio"
+          field?.value && field.type === RADIO_INPUT
             ? field?.value
             : formData?.[formName]?.[field.name] ?? "";
         const checked =
-          field.type === "radio"
+          field.type === RADIO_INPUT
             ? value === formData?.[formName]?.[field.name]
             : value === true;
         const error = formData?.error?.[formName]?.[field.name];
@@ -35,14 +44,14 @@ const Form = ({ formName, formValidation, inputFields }) => {
           ? value === true
           : false;
         switch (field.type) {
-          case "text":
+          case TEXT_INPUT:
             return (
               <InputField
                 key={i}
                 {...{ ...field, value, error, handleChange, isActive }}
               />
             );
-          case "number":
+          case NUM_INPUT:
             return (
               <InputField
                 key={i}
@@ -56,26 +65,26 @@ const Form = ({ formName, formValidation, inputFields }) => {
                 }}
               />
             );
-          case "text-area":
+          case TEXT_AREA_INPUT:
             return (
               <TextArea key={i} {...{ ...field, value, error, handleChange }} />
             );
-          case "select":
+          case SELECT_INPUT:
             return (
               <DropDown key={i} {...{ ...field, value, error, handleChange }} />
             );
-          case "radio":
+          case RADIO_INPUT:
             return (
               <RadioField
                 key={i}
                 {...{ ...field, checked, error, handleChange, isActive }}
               />
             );
-          case "range":
+          case RANGE_INPUT:
             return (
               <RangeSlider key={i} {...{ ...field, value, handleChange }} />
             );
-          case "checkbox":
+          case CHECKBOX_INPUT:
             return (
               <CheckBoxField key={i} {...{ ...field, checked, handleChange }} />
             );

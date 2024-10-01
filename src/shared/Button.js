@@ -3,7 +3,7 @@ import React from "react";
 const defaultStyle =
   "text-white hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-blue-700";
 
-const Button = ({ text, btnStyle, ...props }) => {
+const Button = ({ children, text, btnStyle, ...props }) => {
   return (
     <button
       type="button"
@@ -12,7 +12,7 @@ const Button = ({ text, btnStyle, ...props }) => {
         props.disabled ? "cursor-not-allowed bg-blue-100" : ""
       }`}
     >
-      {text}
+      {children}
     </button>
   );
 };

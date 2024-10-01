@@ -422,6 +422,20 @@ export const contractSections = {
   ],
 };
 
+const commonFields = [
+  "employmentType",
+  "requiredTime",
+  "contractLength",
+  "salaryType",
+  "currency",
+  "recruiterFee",
+  "recruiterFeeType",
+  "recruiterFeeAmount",
+  "recruiterFeePercentage",
+];
+
+const temporaryInternFields = [...commonFields, "rebateTime", "1stReplacement"];
+
 export const activeFieldsObj = {
   Permanent: [
     "employmentType",
@@ -437,47 +451,13 @@ export const activeFieldsObj = {
     "rebateTime",
     "1stReplacement",
   ],
-  Freelance: [
-    "employmentType",
-    "requiredTime",
-    "contractLength",
-    "salaryType",
-    "currency",
-    // "dailyRate",
-    // "rateRange",
-    "recruiterFee",
-    "recruiterFeeType",
-    "recruiterFeeAmount",
-    "recruiterFeePercentage",
-  ],
-  Temporary: [
-    "employmentType",
-    "requiredTime",
-    "contractLength",
-    "salaryType",
-    "currency",
-    // "baseSalary",
-    // "salaryRange",
-    "recruiterFee",
-    "recruiterFeeType",
-    "recruiterFeeAmount",
-    "recruiterFeePercentage",
-    "rebateTime",
-    "1stReplacement",
-  ],
-  Interim: [
-    "employmentType",
-    "requiredTime",
-    "contractLength",
-    "salaryType",
-    "currency",
-    // "baseSalary",
-    // "salaryRange",
-    "recruiterFee",
-    "recruiterFeeType",
-    "recruiterFeeAmount",
-    "recruiterFeePercentage",
-    "rebateTime",
-    "1stReplacement",
-  ],
+  Freelance: commonFields,
+  Temporary: temporaryInternFields,
+  Interim: temporaryInternFields,
 };
+
+// export const replacementName = {
+//   1: "ST",
+//   2: "ND",
+//   3: "RD",
+// };

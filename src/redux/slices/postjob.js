@@ -13,7 +13,7 @@ const initialState = {
       type: "number",
       id: `1thReplacement`,
       name: `1thReplacement`,
-      label: `1TH MONTH`,
+      label: `1ST MONTH`,
       placeholder: "Free Replacement",
       disabledByCheckbox: `1thReplacement`,
       min: 0,

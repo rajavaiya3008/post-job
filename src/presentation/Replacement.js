@@ -1,7 +1,7 @@
 import React from "react";
 import InputField from "../shared/InputField";
 // import { useDispatch, useSelector } from "react-redux";
-import { ContractTypeContainer } from "../container/ContractTypeContainer";
+import { ContractTypeContainer } from "../container/contractTypeContainer";
 // import {
 //   handleContractValidation,
 //   handleReplacementFields,
@@ -9,6 +9,9 @@ import { ContractTypeContainer } from "../container/ContractTypeContainer";
 // import { onChange } from "../redux/slices/form";
 import CheckBoxField from "../shared/CheckBoxField";
 import Button from "../shared/Button";
+import { CHECKBOX_INPUT, NUM_INPUT } from "../utils/constantVariable";
+import { getOrdinalSuffix } from "../utils/constantFun";
+// import { replacementName } from "../description/contract.description";
 
 // const field = {
 //     type:'number',
@@ -69,16 +72,18 @@ const Replacement = ({ handleChange, formName }) => {
           replacementFields.length !== 1 ? "ml-[20px]" : ""
         }`;
         switch (field.type) {
-          case "number":
+          case NUM_INPUT:
             return (
               <div key={i} className="relative">
                 <Button
-                  text={`X`}
+                  // text={`X`}
                   onClick={() => removeReplacement(field.name)}
                   btnStyle={`absolute top-[30px] ${
                     replacementFields.length === 1 ? "hidden" : ""
                   }`}
-                />
+                >
+                  X
+                </Button>
                 {/* <button
                   onClick={() => removeReplacement(field.name)}
                   className={`absolute top-[30px] ${
@@ -101,7 +106,7 @@ const Replacement = ({ handleChange, formName }) => {
                 <CheckBoxField
                   key={i}
                   {...{
-                    type: "checkbox",
+                    type: CHECKBOX_INPUT,
                     id: field.id,
                     name: field.name,
                     value: field.name,
@@ -117,10 +122,12 @@ const Replacement = ({ handleChange, formName }) => {
       })}
 
       <Button
-        text={`+ Add ${replacementFields?.length + 1} th month`}
+        // text={`+ Add ${replacementFields?.length + 1} th month`}
         onClick={() => addFields()}
         btnStyle={`text-blue-700 mt-[20px]`}
-      />
+      >{`+ ADD ${replacementFields?.length + 1}${getOrdinalSuffix(
+        replacementFields?.length + 1
+      )} MONTH`}</Button>
       {/* <button onClick={() => addFields()} className="text-blue-700 mt-[20px]">
         + Add {replacementFields?.length + 1} th month
       </button> */}

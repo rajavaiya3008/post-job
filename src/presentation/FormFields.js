@@ -3,11 +3,12 @@ import React from "react";
 // import TextArea from "../shared/TextArea";
 // import DropDown from "../shared/DropDown";
 // import RadioField from "../shared/RadioField";
-import { FormContainer } from "../container/FormContainer";
+import { FormContainer } from "../container/formContainer";
 import { sectionErrorConditions } from "../description/section";
 // import RangeSlider from "../shared/RangeSlider";
 // import CheckBoxField from "../shared/CheckBoxField";
 import Form from "../shared/Form";
+import { ENGAGEMENT, REBATE_TIME, SKILL } from "../utils/constantVariable";
 
 const FormFields = ({
   sectionTitle,
@@ -123,15 +124,15 @@ const FormFields = ({
       {childComponents?.map(
         ({ name, visible, ChildComponent }, i) => {
           switch (name) {
-            case "engagement": {
+            case ENGAGEMENT: {
               return visible === formData?.[formName]?.[name] ? (
                 <ChildComponent key={i} {...{ handleChange, formName }} />
               ) : null;
             }
-            case "skill": {
+            case SKILL: {
               return <ChildComponent key={i} {...{ formName }} />;
             }
-            case "rebateTime": {
+            case REBATE_TIME: {
               return <ChildComponent key={i} {...{ handleChange, formName }} />;
             }
             // case "recruiterFee": {

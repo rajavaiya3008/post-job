@@ -1,7 +1,7 @@
 import React from "react";
 import FormFields from "./FormFields";
 // import { contractValidation } from "../description/contractType";
-import { ContractTypeContainer } from "../container/ContractTypeContainer";
+import { ContractTypeContainer } from "../container/contractTypeContainer";
 
 const ContractType = () => {
   const { contractFields, contractValidation } = ContractTypeContainer();

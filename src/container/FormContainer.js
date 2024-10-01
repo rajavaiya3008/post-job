@@ -2,6 +2,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleFormError, onChange } from "../redux/slices/form";
 import { validation } from "../utils/validation";
 import { resetFinalFormFields } from "../redux/slices/postjob";
+import { objectKeys } from "../utils/commonFunction";
+import {
+  BASE_SALARY,
+  CHECKBOX_INPUT,
+  CITY,
+  COUNTRY,
+  CURRENCY,
+  DAILY_RANGE,
+  EMPLOYMENTTYPE,
+  NUM_INPUT,
+  RATE_RANGE,
+  RECRUITMENTFEEAMOUNT,
+  RECRUITMENTFEEPERCENTAGE,
+  RECRUITMENTFEETYPE,
+  SALARYTYPE,
+  SALARY_RANGE,
+  SKILL,
+  SKILLS,
+} from "../utils/constantVariable";
 
 export const FormContainer = ({ formName, formValidation }) => {
   const dispatch = useDispatch();
@@ -11,19 +30,20 @@ export const FormContainer = ({ formName, formValidation }) => {
   const handleChange = (e) => {
     const { name, value, type, checked, max } = e.target;
     switch (name) {
-      case "city":
+      case CITY:
         {
           const payload = {
-            name: "country",
+            name: COUNTRY,
             value: value?.split("(")?.[1]?.trim()?.replace(")", "") ?? "",
             formName,
           };
           dispatch(onChange(payload));
         }
         break;
-      case "skill": {
+      case SKILL: {
+        // console.log("skills arr", formData?.[formName]?.skills);
         const payload = {
-          name: "skills",
+          name: SKILLS,
           value:
             !formData?.[formName]?.skills.includes(value) && value
               ? [...formData?.[formName]?.skills, value]
@@ -33,35 +53,33 @@ export const FormContainer = ({ formName, formValidation }) => {
         dispatch(onChange(payload));
         break;
       }
-      case "employmentType": {
-        dispatch(onChange({ name: "salaryType", value: "", formName }));
+      case EMPLOYMENTTYPE: {
+        dispatch(onChange({ name: SALARYTYPE, value: "", formName }));
         dispatch(resetFinalFormFields({ formName }));
         break;
       }
-      case "salaryType": {
-        dispatch(onChange({ name: "recruiterFeeType", value: "", formName }));
-        dispatch(onChange({ name: "recruiterFeeAmount", value: "", formName }));
+      case SALARYTYPE: {
+        dispatch(onChange({ name: RECRUITMENTFEETYPE, value: "", formName }));
+        dispatch(onChange({ name: RECRUITMENTFEEAMOUNT, value: "", formName }));
         dispatch(
-          onChange({ name: "recruiterFeePercentage", value: "", formName })
+          onChange({ name: RECRUITMENTFEEPERCENTAGE, value: "", formName })
         );
-        dispatch(onChange({ name: "currency", value: "", formName }));
+        dispatch(onChange({ name: CURRENCY, value: "", formName }));
         switch (value) {
           case "Base Salary": {
-            dispatch(onChange({ name: "baseSalary", value: "", formName }));
+            dispatch(onChange({ name: BASE_SALARY, value: "", formName }));
             break;
           }
           case "Salary Range": {
-            dispatch(
-              onChange({ name: "salaryRange", value: [0, 0], formName })
-            );
+            dispatch(onChange({ name: SALARY_RANGE, value: [0, 0], formName }));
             break;
           }
           case "Daily Rate": {
-            dispatch(onChange({ name: "dailyRate", value: "", formName }));
+            dispatch(onChange({ name: DAILY_RANGE, value: "", formName }));
             break;
           }
           case "Rate Range": {
-            dispatch(onChange({ name: "rateRange", value: [0, 0], formName }));
+            dispatch(onChange({ name: RATE_RANGE, value: [0, 0], formName }));
             break;
           }
         }
@@ -69,11 +87,11 @@ export const FormContainer = ({ formName, formValidation }) => {
       }
     }
     switch (type) {
-      case "checkbox": {
+      case CHECKBOX_INPUT: {
         dispatch(onChange({ name, value: checked, formName }));
         break;
       }
-      case "number": {
+      case NUM_INPUT: {
         max && Number(value) > Number(max)
           ? dispatch(onChange({ name, value: max, formName }))
           : dispatch(onChange({ name, value, formName }));
@@ -89,7 +107,7 @@ export const FormContainer = ({ formName, formValidation }) => {
     //   : dispatch(onChange({ name, value, formName }));
     // dispatch(onChange({ name, value, formName }));
     let error = validation(name, value, formValidation);
-    if (!Object.keys(error).length) {
+    if (!objectKeys(error).length) {
       delete formError[name];
       error = formError;
     }

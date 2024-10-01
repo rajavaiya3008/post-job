@@ -4,21 +4,31 @@ import DropDown from "../shared/DropDown";
 // import JobDescription from "./JobDescription";
 // import JobSkills from "./JobSkills";
 // import ContractType from "./ContractType";
-import { jobFormSection, selectJob } from "../description/jobForm";
-import { JobFormContainer } from "../container/JobFormContainer";
+import {
+  // jobFormSection,
+  // postJobValidation,
+  selectJob,
+} from "../description/jobForm";
+import { JobFormContainer } from "../container/jobFormContainer";
+import { NEXT, PREV } from "../utils/constantVariable";
+// import { objectEntries } from "../utils/commonFunction";
+import FormFields from "./FormFields";
+import GeneralReview from "./GeneralReview";
 // import RecruitmentInfo from "./RecruitmentInfo";
 // import GeneralReview from "./GeneralReview";
 
 const JobForm = () => {
   const {
     activeForm,
-    jobRole,
+    // jobRole,
     jobRoleErr,
     jobOptions,
+    formFields,
+    formValidation,
     handleChange,
     handleNavigation,
   } = JobFormContainer();
-  const ActiveFormComponent = jobFormSection[activeForm];
+  // const ActiveFormComponent = jobFormSection[activeForm];
 
   return (
     <div className="w-[700px] mt-[30px]">
@@ -26,7 +36,7 @@ const JobForm = () => {
         <DropDown
           {...{
             ...selectJob,
-            value: jobRole,
+            // value: jobRole,
             options: jobOptions,
             error: jobRoleErr,
             handleChange,
@@ -37,28 +47,42 @@ const JobForm = () => {
         />
       </div>
       <div className="mt-[20px] h-[785px] overflow-auto">
-        {ActiveFormComponent ? <ActiveFormComponent /> : null}
-        <div className="mt-[30px] flex justify-between">
+        {activeForm === 5 ? (
+          <GeneralReview />
+        ) : (
+          <div className="shadow-2xl border-[1px] rounded-[20px] p-[25px]">
+            {formFields?.map((section, i) => (
+              <FormFields
+                key={i}
+                {...{ ...section }}
+                formValidation={formValidation}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* {ActiveFormComponent ? <ActiveFormComponent /> : null} */}
+        <div className="mt-[30px] relative flex justify-between">
           <Button
-            text={"Previous"}
-            onClick={() => handleNavigation("prev")}
+            // text={"Previous"}
+            onClick={() => handleNavigation(PREV)}
             disabled={activeForm === 1}
             btnStyle={`text-white hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ${
-              activeForm === 1
-                ? "cursor-not-allowed bg-blue-100"
-                : "bg-blue-700"
+              activeForm === 1 ? "hidden" : "bg-blue-700"
             }`}
-          />
+          >
+            Previous
+          </Button>
           <Button
-            text={"Next"}
-            onClick={() => handleNavigation("next")}
+            // text={"Next"}
+            onClick={() => handleNavigation(NEXT)}
             disabled={activeForm === 5}
-            btnStyle={`text-white hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ${
-              activeForm === 5
-                ? "cursor-not-allowed bg-blue-100"
-                : "bg-blue-700"
+            btnStyle={`text-white absolute right-[0px] hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ${
+              activeForm === 5 ? "hidden" : "bg-blue-700"
             }`}
-          />
+          >
+            Next
+          </Button>
         </div>
       </div>
     </div>

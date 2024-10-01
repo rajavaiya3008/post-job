@@ -24,11 +24,19 @@ const DropDown = ({
         className={style ? style : defaultStyle}
       >
         <option value={""}>{defaultVal}</option>
-        {options.map((option, i) => (
+        {options.map((option, i) => {
+          const isObj = typeof option === "object";
+          return (
+            <option value={isObj ? option.id : option} key={i}>
+              {isObj ? option.value : option}
+            </option>
+          );
+        })}
+        {/* {options.map((option, i) => (
           <option value={option} key={i}>
             {option}
           </option>
-        ))}
+        ))} */}
       </select>
       {error && <span className="text-[12px] text-red-500">{error}</span>}
     </div>

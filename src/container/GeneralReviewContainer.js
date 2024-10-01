@@ -8,7 +8,7 @@ import {
 import { allDataValidation, filterPostJobData } from "../utils/constantFun";
 // import { resetFinalFormFields } from "../redux/slices/postjob";
 // import { useEffect } from "react";
-import { ContractTypeContainer } from "./ContractTypeContainer";
+import { ContractTypeContainer } from "./contractTypeContainer";
 // import { validateAllData } from "../utils/validation";
 import { toast } from "react-toastify";
 // import { validation } from "../utils/validation";
@@ -16,6 +16,8 @@ import { toast } from "react-toastify";
 import { postNewJob } from "../redux/slices/postjob";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { ALL_JOB } from "../utils/routeConstant";
+import { objectEntries, objectKeys } from "../utils/commonFunction";
+// import { onChange } from "../redux/slices/form";
 // import { handleNavigate } from "../redux/slices/stepper";
 
 const GeneralReviewContainer = () => {
@@ -80,7 +82,7 @@ const GeneralReviewContainer = () => {
   //   // let error = validateAllData(validationData, validationFields);
   // };
 
-  const allData = Object.entries(postJobData).map(([key, val]) => ({
+  const allData = objectEntries(postJobData).map(([key, val]) => ({
     ...filterPostJobData(formData[val], formFields[val], val),
     title: postJobTitle[key],
   }));
@@ -89,9 +91,9 @@ const GeneralReviewContainer = () => {
   // const mokData = allDataValidation(2);
   // console.log("mokData", mokData);
 
-  const isAllDataValid = Object.keys(postJobData).every(
+  const isAllDataValid = objectKeys(postJobData).every(
     (key) =>
-      !Object.keys(
+      !objectKeys(
         allDataValidation({
           activeForm: Number(key),
           formData,
@@ -107,6 +109,17 @@ const GeneralReviewContainer = () => {
     } else {
       // const error = validation("jobRole", jobRole, selectJobValidation);
       // dispatch(handleFormError({ error, formName: "postJob" }));
+      // dispatch(
+      //   onChange({
+      //     name: "jobRole",
+      //     value: formData.jobDescription.jobTitle,
+      //     formName: "postJob",
+      //   })
+      // );
+      // const finalFormData = {
+      //   ...formData,
+      //   postJob: { jobRole: formData.jobDescription.jobTitle },
+      // };
       dispatch(
         postNewJob({
           id: jobId || Date.now(),
@@ -145,7 +158,7 @@ const GeneralReviewContainer = () => {
     }
   };
 
-  return { allData, isAllDataValid, submitJobData };
+  return { allData, isAllDataValid, jobId, submitJobData };
 };
 
 export default GeneralReviewContainer;

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onChange } from "../redux/slices/form";
+import { SKILLS } from "../utils/constantVariable";
 
 export const SkillContainer = ({ formName }) => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ export const SkillContainer = ({ formName }) => {
 
   const removeSkill = (skill) => {
     const newSkills = skills.filter((item) => item !== skill);
-    dispatch(onChange({ name: "skills", value: newSkills, formName }));
+    dispatch(onChange({ name: SKILLS, value: newSkills, formName }));
   };
 
   return { error, skills, removeSkill };

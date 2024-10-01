@@ -1,8 +1,8 @@
-import ContractType from "../presentation/ContractType";
-import GeneralReview from "../presentation/GeneralReview";
-import JobDescription from "../presentation/JobDescription";
-import JobSkills from "../presentation/JobSkills";
-import RecruitmentInfo from "../presentation/RecruitmentInfo";
+// import ContractType from "../presentation/ContractType";
+// import GeneralReview from "../presentation/GeneralReview";
+// import JobDescription from "../presentation/JobDescription";
+// import JobSkills from "../presentation/JobSkills";
+// import RecruitmentInfo from "../presentation/RecruitmentInfo";
 import { contValidation } from "./const";
 import { jobDescValidation } from "./jobDescription";
 import { jobSkillsValidation } from "./jobSkills";
@@ -34,13 +34,13 @@ export const postJobValidation = {
   4: recruitmentInfoValidation,
 };
 
-export const jobFormSection = {
-  1: JobDescription,
-  2: JobSkills,
-  3: ContractType,
-  4: RecruitmentInfo,
-  5: GeneralReview,
-};
+// export const jobFormSection = {
+//   1: JobDescription,
+//   2: JobSkills,
+//   3: ContractType,
+//   4: RecruitmentInfo,
+//   5: GeneralReview,
+// };
 
 export const postJobTitle = {
   1: "Job Description",
@@ -81,4 +81,5 @@ export const postJobFieldsTitle = {
   cvLimit: "CV LIMIT",
   urgency: "URGENCY",
   recruiterMessage: "RECRUITER MESSAGE",
+  unlimitedCVs: "UNLIMITED CVS?",
 };
