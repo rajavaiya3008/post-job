@@ -15,10 +15,25 @@ export const jobDescValidation = {
   workType: [{ required: true, message: "Please Select Country" }],
 };
 
+export const cityOption = [
+  "Odate (Japan)",
+  "Siuri (India)",
+  "Kstovo (Russia)",
+  "aha (India)",
+  "hongkong (HK)",
+  "surat (India)",
+  "london (UK)",
+];
+
+export const countryOption = cityOption.map((city) =>
+  city?.split("(")?.[1]?.trim()?.replace(")", "")
+);
+
 export const JobDescData = [
   {
     formName: "jobDescription",
     sectionTitle: "Write a headline for your job post",
+    sectionVisible: 1,
     inputFields: [
       {
         type: "text",
@@ -32,6 +47,7 @@ export const JobDescData = [
   {
     formName: "jobDescription",
     sectionTitle: "Describe the job in more details",
+    sectionVisible: 1,
     inputFields: [
       {
         type: "text-area",
@@ -44,6 +60,7 @@ export const JobDescData = [
   {
     formName: "jobDescription",
     sectionTitle: "Choose Industry",
+    sectionVisible: 1,
     inputFields: [
       {
         type: "select",
@@ -59,6 +76,7 @@ export const JobDescData = [
     formName: "jobDescription",
     sectionTitle: "Engagement",
     inputFieldStyle: "mt-[30px]",
+    sectionVisible: 1,
     inputFields: [
       {
         type: "radio",
@@ -102,6 +120,7 @@ export const JobDescData = [
   {
     formName: "jobDescription",
     sectionTitle: "Specify Location",
+    sectionVisible: 1,
     inputFields: [
       {
         type: "select",
@@ -109,12 +128,7 @@ export const JobDescData = [
         name: "city",
         label: "CITY",
         defaultVal: "Select City",
-        options: [
-          "Odate (Japan)",
-          "Siuri (India)",
-          "Kstovo (Russia)",
-          "aha (India)",
-        ],
+        options: cityOption,
       },
       {
         type: "select",
@@ -123,7 +137,7 @@ export const JobDescData = [
         label: "COUNTRY",
         disabled: true,
         defaultVal: "Select Country",
-        options: ["Japan", "India", "Russia"],
+        options: countryOption,
       },
     ],
   },
@@ -131,6 +145,7 @@ export const JobDescData = [
     formName: "jobDescription",
     sectionTitle: "Workplace Type",
     inputFieldStyle: "mt-[30px]",
+    sectionVisible: 1,
     inputFields: [
       {
         type: "radio",

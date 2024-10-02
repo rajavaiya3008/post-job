@@ -1,17 +1,7 @@
 import React from "react";
-import { ALL_JOB, HOME_PAGE } from "../utils/routeConstant";
+// import { ALL_JOB, HOME_PAGE } from "../utils/routeConstant";
 import { NavLink, useLocation } from "react-router-dom";
-
-const navItems = [
-  {
-    path: HOME_PAGE,
-    itemName: "Post Job",
-  },
-  {
-    path: ALL_JOB,
-    itemName: "All Jobs",
-  },
-];
+import { navItems } from "../description/navBar.description";
 
 const Navbar = () => {
   const { pathname } = useLocation();

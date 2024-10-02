@@ -51,13 +51,15 @@ const JobForm = () => {
           <GeneralReview />
         ) : (
           <div className="shadow-2xl border-[1px] rounded-[20px] p-[25px]">
-            {formFields?.map((section, i) => (
-              <FormFields
-                key={i}
-                {...{ ...section }}
-                formValidation={formValidation}
-              />
-            ))}
+            {formFields?.map((section, i) =>
+              section.sectionVisible === activeForm ? (
+                <FormFields
+                  key={i}
+                  {...{ ...section }}
+                  formValidation={formValidation}
+                />
+              ) : null
+            )}
           </div>
         )}
 

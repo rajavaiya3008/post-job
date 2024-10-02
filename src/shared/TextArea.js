@@ -1,6 +1,6 @@
 import React from "react";
 
-const TextArea = ({error,handleChange,type,...props}) => {
+const TextArea = ({ error, handleChange, type, ...props }) => {
   return (
     <div className="mt-[15px]">
       <textarea

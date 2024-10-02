@@ -12,7 +12,7 @@ import { handleFinalFormFields, setPostJobData } from "../redux/slices/postjob";
 // import { FormContainer } from "./FormContainer";
 import { allDataValidation } from "../utils/constantFun";
 import { objectEntries, objectKeys } from "../utils/commonFunction";
-import { NEXT, PREV } from "../utils/constantVariable";
+import { JOB_ROLE, NEXT, PREV } from "../utils/constantVariable";
 import { JobDescData, jobDescValidation } from "../description/jobDescription";
 import { jobSkillData, jobSkillsValidation } from "../description/jobSkills";
 import {
@@ -34,12 +34,12 @@ export const JobFormContainer = () => {
   //   formValidation: [],
   // });
 
-  const postJobSections = {
-    1: JobDescData,
-    2: jobSkillData,
-    3: contractFields,
-    4: recruitmentInfoData,
-  };
+  // const postJobSections = {
+  //   1: JobDescData,
+  //   2: jobSkillData,
+  //   3: contractFields,
+  //   4: recruitmentInfoData,
+  // };
 
   const postJobValidations = {
     1: jobDescValidation,
@@ -48,7 +48,14 @@ export const JobFormContainer = () => {
     4: recruitmentInfoValidation,
   };
 
-  const formFields = postJobSections[activeForm];
+  const formFields = [
+    ...JobDescData,
+    ...jobSkillData,
+    ...contractFields,
+    ...recruitmentInfoData,
+  ];
+
+  // const formFields = postJobSections[activeForm];
   const formValidation = postJobValidations[activeForm];
 
   const jobOptions = objectEntries(allJobData).map(([key, val]) => ({
@@ -64,7 +71,7 @@ export const JobFormContainer = () => {
     const { name, value, id } = e.target;
     // console.log("id", id);
     switch (name) {
-      case "jobRole": {
+      case JOB_ROLE: {
         dispatch(onChange({ name, value, formName: "postJob" }));
         const reuseJobData = Object?.entries(allJobData)?.find(
           ([key]) => key === value

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,21 +10,19 @@ import TableRow from "@mui/material/TableRow";
 // import { NavLink } from "react-router-dom";
 // import Button from "./Button";
 import TableRows from "./TableRows";
-import { filterTableData } from "../utils/constantFun";
+// import { filterTableData } from "../utils/constantFun";
 
-const Pagination = ({ tableColumn, tableRows, searchVal, searchKey }) => {
+const Pagination = ({ tableColumn, tableRows, searchVal, tableStyle }) => {
   // console.log("searchVal", searchVal);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  tableRows = useMemo(() => {
-    if (searchVal.trim()) {
-      return filterTableData(tableRows, searchVal, searchKey);
-    }
-    return tableRows;
-  }, [tableRows, searchVal, searchKey]);
+  useEffect(() => {
+    setPage(0);
+  }, [searchVal]);
 
   const handleChangePage = (event, newPage) => {
+    // console.log("newPage", newPage);
     setPage(newPage);
   };
 
@@ -34,7 +32,7 @@ const Pagination = ({ tableColumn, tableRows, searchVal, searchKey }) => {
   };
 
   return (
-    <div>
+    <div className={tableStyle ? tableStyle : ""}>
       <Paper sx={{ width: "1000px", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">

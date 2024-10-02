@@ -15,6 +15,7 @@ export const recruitmentInfoData = [
     formName: "recruitmentInfo",
     sectionTitle: "Specify the number of CVs",
     inputFieldStyle: "relative",
+    sectionVisible: 4,
     inputFields: [
       {
         type: "number",
@@ -39,6 +40,7 @@ export const recruitmentInfoData = [
     formName: "recruitmentInfo",
     sectionTitle: "Urgency",
     inputFieldStyle: "mt-[30px]",
+    sectionVisible: 4,
     inputFields: [
       {
         type: "radio",
@@ -75,6 +77,7 @@ export const recruitmentInfoData = [
   {
     formName: "recruitmentInfo",
     sectionTitle: "Message to Recruiters",
+    sectionVisible: 4,
     inputFields: [
       {
         type: "text-area",
@@ -87,6 +90,7 @@ export const recruitmentInfoData = [
   {
     formName: "recruitmentInfo",
     sectionTitle: "Terms and Service",
+    sectionVisible: 4,
     inputFields: [
       {
         type: "checkbox",

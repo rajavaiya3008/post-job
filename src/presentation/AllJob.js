@@ -8,9 +8,11 @@ import Pagination from "../shared/Pagination";
 import AlertDialog from "../shared/AlertDialog";
 import InputField from "../shared/InputField";
 // import { TEXT_INPUT } from "../utils/constantVariable";
-import useHandleChange from "../hooks/useHandleChange";
+// import useHandleChange from "../hooks/useHandleChange";
 import AllJobContainer from "../container/allJobContainer";
-import { inputData } from "../description/allJob.description";
+import { searchFields } from "../description/allJob.description";
+import DropDown from "../shared/DropDown";
+import { CITY, SELECT_INPUT, TEXT_INPUT } from "../utils/constantVariable";
 // import Pagination from "@mui/material/Pagination";
 
 const AllJob = () => {
@@ -18,11 +20,15 @@ const AllJob = () => {
     tableColumn,
     tableRows,
     isDialogOpen,
+    input,
+    cityOptions,
+    countryOptions,
+    handleChange,
     setIsDialogOpen,
     handleConfirmDelete,
   } = AllJobContainer();
-  const { input, handleChange } = useHandleChange();
-  console.log("input", input);
+  // const { input, handleChange } = useHandleChange();
+  // console.log("input", input);
   //   const dispatch = useDispatch();
   //   const allJobData = useSelector((state) => state.postjob.allJobData);
 
@@ -102,21 +108,42 @@ const AllJob = () => {
     <div>
       <h1 className="text-center mt-[15px] text-[30px]">All Jobs</h1>
       <div className="flex flex-col justify-center mx-auto w-[1000px]">
-        <InputField
-          {...{
-            ...inputData,
-            value: input[inputData.name] ?? "",
-            handleChange,
-            isActive: true,
-            inputDivStyle: "w-[250px] mx-auto mt-[20px] mb-[20px]",
-          }}
-        />
+        {searchFields.map((field, i) => {
+          const value = input[field.name] ?? "";
+          switch (field.type) {
+            case TEXT_INPUT: {
+              return (
+                <InputField
+                  key={i}
+                  {...{
+                    ...field,
+                    value,
+                    handleChange,
+                    isActive: true,
+                  }}
+                />
+              );
+            }
+            case SELECT_INPUT: {
+              const options =
+                field.name === CITY ? cityOptions : countryOptions;
+              return (
+                <DropDown
+                  key={i}
+                  {...{ ...field, value, handleChange, options }}
+                />
+              );
+            }
+          }
+        })}
         <Pagination
           {...{
             tableColumn,
             tableRows: tableRows.reverse(),
-            searchVal: input[inputData.name] ?? "",
-            searchKey: ["jobName", "employmentType", "workType"],
+            searchVal: input,
+            tableStyle: "mt-[-65px]",
+            // searchVal: input[inputData.name] ?? "",
+            // searchKey: ["jobName", "employmentType", "workType"],
           }}
         />
         <AlertDialog

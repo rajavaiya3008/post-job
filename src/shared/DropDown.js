@@ -4,6 +4,8 @@ import React from "react";
 const defaultStyle =
   "bg-blue-50 border border-gray-300 text-gray-400 text-lg rounded-lg w-full p-2.5";
 
+const defaultLabel = "text-gray-900 text-[12px]";
+
 const DropDown = ({
   label,
   options,
@@ -11,11 +13,16 @@ const DropDown = ({
   handleChange,
   error,
   style,
+  selectLabel,
+  selectDiv,
   ...props
 }) => {
   return (
-    <div>
-      <label htmlFor={props.id} className="text-gray-900 text-[12px]">
+    <div className={selectDiv ? selectDiv : ""}>
+      <label
+        htmlFor={props.id}
+        className={selectLabel ? selectLabel : defaultLabel}
+      >
         {label}
       </label>
       <select

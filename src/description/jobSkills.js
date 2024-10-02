@@ -16,6 +16,7 @@ export const jobSkillData = [
   {
     formName: "jobSkills",
     sectionTitle: "Required seniority level",
+    sectionVisible: 2,
     inputFields: [
       {
         type: "select",
@@ -31,6 +32,7 @@ export const jobSkillData = [
     formName: "jobSkills",
     sectionTitle: "Required years of experience",
     inputFieldStyle: "mt-[30px]",
+    sectionVisible: 2,
     inputFields: [
       {
         type: "radio",
@@ -98,6 +100,7 @@ export const jobSkillData = [
     formName: "jobSkills",
     sectionTitle: "Management experience required",
     inputFieldStyle: "mt-[30px]",
+    sectionVisible: 2,
     inputFields: [
       {
         type: "radio",
@@ -124,6 +127,7 @@ export const jobSkillData = [
   {
     formName: "jobSkills",
     sectionTitle: "Choose skills required for your project",
+    sectionVisible: 2,
     inputFields: [
       {
         type: "select",

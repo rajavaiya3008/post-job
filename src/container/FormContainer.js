@@ -10,16 +10,20 @@ import {
   COUNTRY,
   CURRENCY,
   DAILY_RANGE,
-  EMPLOYMENTTYPE,
+  EMPLOYMENT_TYPE,
   NUM_INPUT,
   RATE_RANGE,
-  RECRUITMENTFEEAMOUNT,
-  RECRUITMENTFEEPERCENTAGE,
-  RECRUITMENTFEETYPE,
-  SALARYTYPE,
+  RECRUITMENT_FEE_AMOUNT,
+  RECRUITMENT_FEE_PERCENTAGE,
+  RECRUITMENT_FEE_TYPE,
+  SALARY_TYPE,
   SALARY_RANGE,
   SKILL,
   SKILLS,
+  SAL_BASE,
+  SAL_RANGE,
+  SAL_DAILY,
+  SAL_RATE_RANGE,
 } from "../utils/constantVariable";
 
 export const FormContainer = ({ formName, formValidation }) => {
@@ -53,32 +57,34 @@ export const FormContainer = ({ formName, formValidation }) => {
         dispatch(onChange(payload));
         break;
       }
-      case EMPLOYMENTTYPE: {
-        dispatch(onChange({ name: SALARYTYPE, value: "", formName }));
+      case EMPLOYMENT_TYPE: {
+        dispatch(onChange({ name: SALARY_TYPE, value: "", formName }));
         dispatch(resetFinalFormFields({ formName }));
         break;
       }
-      case SALARYTYPE: {
-        dispatch(onChange({ name: RECRUITMENTFEETYPE, value: "", formName }));
-        dispatch(onChange({ name: RECRUITMENTFEEAMOUNT, value: "", formName }));
+      case SALARY_TYPE: {
+        dispatch(onChange({ name: RECRUITMENT_FEE_TYPE, value: "", formName }));
         dispatch(
-          onChange({ name: RECRUITMENTFEEPERCENTAGE, value: "", formName })
+          onChange({ name: RECRUITMENT_FEE_AMOUNT, value: "", formName })
+        );
+        dispatch(
+          onChange({ name: RECRUITMENT_FEE_PERCENTAGE, value: "", formName })
         );
         dispatch(onChange({ name: CURRENCY, value: "", formName }));
         switch (value) {
-          case "Base Salary": {
+          case SAL_BASE: {
             dispatch(onChange({ name: BASE_SALARY, value: "", formName }));
             break;
           }
-          case "Salary Range": {
+          case SAL_RANGE: {
             dispatch(onChange({ name: SALARY_RANGE, value: [0, 0], formName }));
             break;
           }
-          case "Daily Rate": {
+          case SAL_DAILY: {
             dispatch(onChange({ name: DAILY_RANGE, value: "", formName }));
             break;
           }
-          case "Rate Range": {
+          case SAL_RATE_RANGE: {
             dispatch(onChange({ name: RATE_RANGE, value: [0, 0], formName }));
             break;
           }

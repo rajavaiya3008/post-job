@@ -31,6 +31,7 @@ export const recruiterFeeFields = {
   formName: "contractType",
   sectionTitle: "Recruiter fee",
   inputFieldStyle: "mt-[30px] relative",
+  sectionVisible: 3,
   inputFields: [
     {
       type: "radio",
@@ -111,6 +112,7 @@ const currencyField = {
 export const rateRangeFields = {
   formName: "contractType",
   sectionTitle: "Rate Range",
+  sectionVisible: 3,
   inputFields: [
     {
       type: "range",
@@ -142,6 +144,7 @@ export const rateRangeFields = {
 export const salaryRangeFields = {
   formName: "contractType",
   sectionTitle: "Salary Range",
+  sectionVisible: 3,
   inputFields: [
     {
       type: "range",
@@ -173,6 +176,7 @@ export const salaryRangeFields = {
 export const dailyRateFields = {
   formName: "contractType",
   sectionTitle: "Daily Rate",
+  sectionVisible: 3,
   inputFields: [
     currencyField,
     {
@@ -194,6 +198,7 @@ export const negotiableField = {
 export const baseSalaryFields = {
   formName: "contractType",
   sectionTitle: "Base salary",
+  sectionVisible: 3,
   inputFields: [
     currencyField,
     {
@@ -210,6 +215,7 @@ export const rebateTimeFields = {
   formName: "contractType",
   sectionTitle: "Rebate time",
   inputFieldStyle: "mt-[30px]",
+  sectionVisible: 3,
   inputFields: [
     {
       type: "radio",
@@ -241,6 +247,7 @@ export const salaryTypeFields = {
   sectionTitle: "Salary Type",
   name: "salaryType",
   inputFieldStyle: "mt-[30px] flex flex-wrap",
+  sectionVisible: 3,
   inputFields: [
     {
       type: "radio",
@@ -308,6 +315,7 @@ export const salaryTypeFields = {
 export const contractLength = {
   formName: "contractType",
   sectionTitle: "Specify contract length",
+  sectionVisible: 3,
   inputFields: [
     {
       type: "select",
@@ -326,6 +334,7 @@ export const contractData = [
     sectionTitle: "Choose employment type",
     name: "employmentType",
     inputFieldStyle: "mt-[30px]",
+    sectionVisible: 3,
     inputFields: [
       {
         type: "radio",
@@ -374,6 +383,7 @@ export const contractData = [
     sectionTitle: "What is a required time load",
     name: "requiredTime",
     inputFieldStyle: "mt-[30px]",
+    sectionVisible: 3,
     inputFields: [
       {
         type: "radio",

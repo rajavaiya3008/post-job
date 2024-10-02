@@ -16,7 +16,21 @@ import {
 } from "../redux/slices/postjob";
 import { onChange } from "../redux/slices/form";
 import { objectEntries, objectFromEntries } from "../utils/commonFunction";
-import { NUM_INPUT, RANGE_INPUT, SALARYTYPE } from "../utils/constantVariable";
+import {
+  FIXED,
+  FREELANCE,
+  NEGOTIABLE,
+  NUM_INPUT,
+  PERCENTAGE,
+  RANGE_INPUT,
+  REPLACEMENT,
+  SALARY_RANGE,
+  SALARY_TYPE,
+  SAL_BASE,
+  SAL_DAILY,
+  SAL_RANGE,
+  SAL_RATE_RANGE,
+} from "../utils/constantVariable";
 import { getOrdinalSuffix } from "../utils/constantFun";
 
 export const ContractTypeContainer = (props) => {
@@ -39,15 +53,15 @@ export const ContractTypeContainer = (props) => {
         objectEntries(validationFields).filter(
           ([key]) =>
             activeFieldsObj[empType]?.includes(key) ||
-            (key.includes("Replacement") && empType !== "Freelance")
+            (key.includes(REPLACEMENT) && empType !== FREELANCE)
         )
       )
     : { ...validationFields };
   // console.log("contractValidation", contractValidation);
 
-  if (formData.contractType.recruiterFeeType === "Fixed") {
+  if (formData.contractType.recruiterFeeType === FIXED) {
     delete contractValidation.recruiterFeePercentage;
-  } else if (formData.contractType.recruiterFeeType === "Percentage") {
+  } else if (formData.contractType.recruiterFeeType === PERCENTAGE) {
     delete contractValidation.recruiterFeeAmount;
   }
 
@@ -56,11 +70,11 @@ export const ContractTypeContainer = (props) => {
     : contractSections?.Default;
 
   const salaryFieldIndex = contractFields.findIndex(
-    (sec) => sec.name === SALARYTYPE
+    (sec) => sec.name === SALARY_TYPE
   );
 
   switch (formData?.contractType?.salaryType) {
-    case "Base Salary": {
+    case SAL_BASE: {
       contractFields = contractFields.toSpliced(
         salaryFieldIndex + 1,
         0,
@@ -72,7 +86,7 @@ export const ContractTypeContainer = (props) => {
       ];
       break;
     }
-    case "Salary Range": {
+    case SAL_RANGE: {
       contractFields = contractFields.toSpliced(
         salaryFieldIndex + 1,
         0,
@@ -84,7 +98,7 @@ export const ContractTypeContainer = (props) => {
       ];
       break;
     }
-    case "Negotiable": {
+    case NEGOTIABLE: {
       contractFields = contractFields.toSpliced(
         salaryFieldIndex + 1,
         0,
@@ -93,7 +107,7 @@ export const ContractTypeContainer = (props) => {
       );
       break;
     }
-    case "Daily Rate": {
+    case SAL_DAILY: {
       contractFields = contractFields.toSpliced(
         salaryFieldIndex + 1,
         0,
@@ -105,7 +119,7 @@ export const ContractTypeContainer = (props) => {
       ];
       break;
     }
-    case "Rate Range": {
+    case SAL_RATE_RANGE: {
       contractFields = contractFields.toSpliced(
         salaryFieldIndex + 1,
         0,
@@ -186,7 +200,7 @@ export const ContractTypeContainer = (props) => {
     // console.log("contractValidation", contractValidation);
     const newValidation = objectFromEntries(
       objectEntries(contractValidation).filter(
-        ([key], i) => !key.includes("Replacement")
+        ([key], i) => !key.includes(REPLACEMENT)
       )
     );
     // console.log("newValidation", newValidation);
