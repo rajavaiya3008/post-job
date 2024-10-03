@@ -8,8 +8,10 @@ import {
 } from "./commonFunction";
 import {
   CONT_TYPE,
+  FIXED,
   JOB_DESC,
   JOB_SKILLS,
+  NEGOTIABLE,
   RECRUITMENT_INFO,
 } from "./constantVariable";
 import { validateAllData } from "./validation";
@@ -91,23 +93,23 @@ export const allDataValidation = ({
   let validationFields = postJobValidation[activeForm];
   switch (activeForm) {
     case 1: {
+      let err = validateAllData(validationData, validationFields);
       if (formData.jobDescription.engagement !== "Just for PSL") {
-        const jobDescValidation = { ...validationFields };
-        delete jobDescValidation.engagementPSLAjencies;
-        validationFields = jobDescValidation;
+        delete err.engagementPSLAjencies;
+        // const jobDescValidation = { ...validationFields };
+        // delete jobDescValidation.engagementPSLAjencies;
+        // validationFields = jobDescValidation;
       }
       if (
         formData.jobDescription.engagementPSLAjencies !== "Select PSL agency" ||
         formData.jobDescription.engagement !== "Just for PSL"
       ) {
-        const jobDescValidation = { ...validationFields };
-        delete jobDescValidation.PSLAgency;
-        validationFields = jobDescValidation;
+        delete err.PSLAgency;
+        // const jobDescValidation = { ...validationFields };
+        // delete jobDescValidation.PSLAgency;
+        // validationFields = jobDescValidation;
       }
-      return [
-        validateAllData(validationData, validationFields),
-        validationFields,
-      ];
+      return [err, validationFields];
     }
     case 2: {
       return [
@@ -117,10 +119,16 @@ export const allDataValidation = ({
     }
     case 3: {
       validationFields = contractValidation;
-      return [
-        validateAllData(validationData, validationFields),
-        validationFields,
-      ];
+      let err = validateAllData(validationData, validationFields);
+      if (formData?.contractType?.salaryType === NEGOTIABLE) {
+        delete err.currency;
+      }
+      if (formData.contractType.recruiterFeeType === FIXED) {
+        delete err.recruiterFeePercentage;
+      } else {
+        delete err.recruiterFeeAmount;
+      }
+      return [err, validationFields];
     }
     case 4: {
       return [

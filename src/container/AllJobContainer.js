@@ -5,7 +5,7 @@ import { filterTableData, handlePagination } from "../utils/constantFun";
 import { resetFormData } from "../redux/slices/form";
 import { handleNavigate } from "../redux/slices/stepper";
 import useHandleChange from "../hooks/useHandleChange";
-import { objectEntries } from "../utils/commonFunction";
+import { objectEntries, objectFromEntries } from "../utils/commonFunction";
 import { searchKey } from "../description/allJob.description";
 
 const AllJobContainer = () => {
@@ -24,8 +24,10 @@ const AllJobContainer = () => {
   const handleConfirmDelete = (isConfirmed) => {
     if (isConfirmed && jobIdToDelete) {
       const jobData = { ...allJobData };
-      delete jobData[jobIdToDelete];
-      dispatch(deleteJobData(jobData));
+      const remainingJob = objectFromEntries(
+        objectEntries(jobData).filter(([key]) => !jobIdToDelete.includes(key))
+      );
+      dispatch(deleteJobData(remainingJob));
     }
     setJobIdToDelete(null);
   };
@@ -90,6 +92,7 @@ const AllJobContainer = () => {
     handleChange,
     setIsDialogOpen,
     handleConfirmDelete,
+    deleteJob,
   };
 };
 

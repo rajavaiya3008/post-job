@@ -59,11 +59,11 @@ export const ContractTypeContainer = (props) => {
     : { ...validationFields };
   // console.log("contractValidation", contractValidation);
 
-  if (formData.contractType.recruiterFeeType === FIXED) {
-    delete contractValidation.recruiterFeePercentage;
-  } else if (formData.contractType.recruiterFeeType === PERCENTAGE) {
-    delete contractValidation.recruiterFeeAmount;
-  }
+  // if (formData.contractType.recruiterFeeType === FIXED) {
+  //   delete contractValidation.recruiterFeePercentage;
+  // } else if (formData.contractType.recruiterFeeType === PERCENTAGE) {
+  //   delete contractValidation.recruiterFeeAmount;
+  // }
 
   let contractFields = formData?.contractType?.employmentType
     ? contractSections?.[formData?.contractType?.employmentType]
@@ -105,6 +105,7 @@ export const ContractTypeContainer = (props) => {
         negotiableField,
         recruiterFeeFields
       );
+      // delete contractValidation.currency;
       break;
     }
     case SAL_DAILY: {

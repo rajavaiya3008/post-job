@@ -13,6 +13,9 @@ import AllJobContainer from "../container/allJobContainer";
 import { searchFields } from "../description/allJob.description";
 import DropDown from "../shared/DropDown";
 import { CITY, SELECT_INPUT, TEXT_INPUT } from "../utils/constantVariable";
+import Button from "../shared/Button";
+import usePagination from "../hooks/usePagination";
+import TableSearch from "../shared/TableSearch";
 // import Pagination from "@mui/material/Pagination";
 
 const AllJob = () => {
@@ -26,7 +29,18 @@ const AllJob = () => {
     handleChange,
     setIsDialogOpen,
     handleConfirmDelete,
+    deleteJob,
   } = AllJobContainer();
+
+  const {
+    page,
+    rowsPerPage,
+    selected,
+    handleChangePage,
+    handleChangeRowsPerPage,
+    handleSelectRow,
+  } = usePagination({ searchVal: input });
+
   // const { input, handleChange } = useHandleChange();
   // console.log("input", input);
   //   const dispatch = useDispatch();
@@ -108,7 +122,16 @@ const AllJob = () => {
     <div>
       <h1 className="text-center mt-[15px] text-[30px]">All Jobs</h1>
       <div className="flex flex-col justify-center mx-auto w-[1000px]">
-        {searchFields.map((field, i) => {
+        <TableSearch
+          {...{
+            searchFields,
+            input,
+            handleChange,
+            cityOptions,
+            countryOptions,
+          }}
+        />
+        {/* {searchFields.map((field, i) => {
           const value = input[field.name] ?? "";
           switch (field.type) {
             case TEXT_INPUT: {
@@ -135,12 +158,19 @@ const AllJob = () => {
               );
             }
           }
-        })}
+        })} */}
         <Pagination
           {...{
             tableColumn,
             tableRows: tableRows.reverse(),
+            checkbox: true,
             searchVal: input,
+            page,
+            rowsPerPage,
+            selected,
+            handleChangePage,
+            handleChangeRowsPerPage,
+            handleSelectRow,
             tableStyle: "mt-[-65px]",
             // searchVal: input[inputData.name] ?? "",
             // searchKey: ["jobName", "employmentType", "workType"],
@@ -152,6 +182,14 @@ const AllJob = () => {
           onConfirm={handleConfirmDelete}
           message={"Are you sure you want to delete this job?"}
         />
+        <Button
+          onClick={() => deleteJob(selected)}
+          btnStyle={`text-white hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 w-[200px] mx-auto mt-[20px] ${
+            !selected.length ? "hidden" : "bg-blue-700"
+          }`}
+        >
+          Delete Selected Job
+        </Button>
       </div>
     </div>
   );

@@ -20,9 +20,8 @@ export const cityOption = [
   "Siuri (India)",
   "Kstovo (Russia)",
   "aha (India)",
-  "hongkong (HK)",
-  "surat (India)",
   "london (UK)",
+  "hongkong	(HK)",
 ];
 
 export const countryOption = cityOption.map((city) =>

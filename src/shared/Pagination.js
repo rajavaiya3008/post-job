@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,26 +10,55 @@ import TableRow from "@mui/material/TableRow";
 // import { NavLink } from "react-router-dom";
 // import Button from "./Button";
 import TableRows from "./TableRows";
+// import usePagination from "../hooks/usePagination";
 // import { filterTableData } from "../utils/constantFun";
 
-const Pagination = ({ tableColumn, tableRows, searchVal, tableStyle }) => {
+const Pagination = ({
+  tableColumn,
+  tableRows,
+  checkbox,
+  // searchVal,
+  tableStyle,
+  page,
+  rowsPerPage,
+  selected,
+  handleChangePage,
+  handleChangeRowsPerPage,
+  handleSelectRow,
+}) => {
+  // const {
+  //   page,
+  //   rowsPerPage,
+  //   selected,
+  //   handleChangePage,
+  //   handleChangeRowsPerPage,
+  //   handleSelectRow,
+  // } = usePagination({ searchVal });
+
   // console.log("searchVal", searchVal);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  // const [page, setPage] = useState(0);
+  // const [rowsPerPage, setRowsPerPage] = useState(5);
+  // const [selected, setSelected] = useState([]);
 
-  useEffect(() => {
-    setPage(0);
-  }, [searchVal]);
+  // useEffect(() => {
+  //   setPage(0);
+  // }, [searchVal]);
 
-  const handleChangePage = (event, newPage) => {
-    // console.log("newPage", newPage);
-    setPage(newPage);
-  };
+  // const handleChangePage = (event, newPage) => {
+  //   // console.log("newPage", newPage);
+  //   setPage(newPage);
+  // };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
+
+  // const handleSelectRow = (id) => {
+  //   setSelected((prev) =>
+  //     prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+  //   );
+  // };
 
   return (
     <div className={tableStyle ? tableStyle : ""}>
@@ -44,7 +73,17 @@ const Pagination = ({ tableColumn, tableRows, searchVal, tableStyle }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRows {...{ page, rowsPerPage, tableColumn, tableRows }} />
+              <TableRows
+                {...{
+                  page,
+                  rowsPerPage,
+                  tableColumn,
+                  tableRows,
+                  handleSelectRow,
+                  selected,
+                  checkbox,
+                }}
+              />
             </TableBody>
           </Table>
         </TableContainer>

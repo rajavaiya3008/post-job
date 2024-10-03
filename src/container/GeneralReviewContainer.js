@@ -82,6 +82,7 @@ const GeneralReviewContainer = () => {
   //   // let error = validateAllData(validationData, validationFields);
   // };
 
+  // console.log("contractValidation", contractValidation);
   const allData = objectEntries(postJobData).map(([key, val]) => ({
     ...filterPostJobData(formData[val], formFields[val], val),
     title: postJobTitle[key],
@@ -119,6 +120,15 @@ const GeneralReviewContainer = () => {
       // const finalFormData = {
       //   ...formData,
       //   postJob: { jobRole: formData.jobDescription.jobTitle },
+      // };
+      // const contValidation = {
+      //   ...contractValidation,
+      //   recruiterFeeAmount: [
+      //     { required: true, message: "Please Enter Recruiter Fee Amount" },
+      //   ],
+      //   recruiterFeePercentage: [
+      //     { required: true, message: "Please Enter Recruiter Fee Percentage" },
+      //   ],
       // };
       dispatch(
         postNewJob({

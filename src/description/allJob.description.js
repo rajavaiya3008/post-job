@@ -3,6 +3,10 @@ import { SELECT_INPUT, TEXT_INPUT } from "../utils/constantVariable";
 export const allJobColData = ({ deleteJob }) => {
   return [
     {
+      type: "checkbox",
+      label: "",
+    },
+    {
       type: "text",
       name: "id",
       label: "ID",
